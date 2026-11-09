@@ -1,5 +1,7 @@
 # 구현 진행표
 
+이번 요청 범위는 **1~13번**이며, 14~32번은 후속 작업으로 남깁니다.
+
 대상: `Koreapanda4444/Interlock-128`, `main`. 원격 비어 있음과 push 권한 확인. 이전 코어 미승계.
 
 단계별 구현·검증 후 커밋과 원격 반영. 원격 반영 완료부터 다음 단계 작업 시작까지 최소 300초 정지. 최종 SHA는 인계 보고에 기록.
@@ -15,8 +17,8 @@
 | 7 | `feat: implement linear and nonlinear mixing` | 완료 | `631cfcf3b7ba90f920c0a89ef55937ac5d58b974` / L32/FS/FM 독립 C 기준식, 단일비트·최댓값·carry 경계 42×42 및 고정 1,024쌍 대조; CTest 5/5
 | 8 | `feat: implement ordered forward rounds` | 완료 | `6e2250253a661e0b3c8391d2bc1786714e0ed20a` / 순서 의존 XOR 갱신과 회전·재배열, 0블록·첫4서브키 1R KAT 및 재배열 전 4워드 일치; CTest 6/6
 | 9 | `feat: implement reverse round transitions` | 완료 | `f8b0bb4e25f4a0e6b471c5ac26f47e11837b473a` / 역회전·역갱신; 4,096개 상태·서브키의 양방향 1R 왕복과 별도 기준식 일치; CTest 7/7
-| 10 | `feat: expand complete round key schedules` | 완료 | 448B 전체 일정·LE32·NUL 하나 확인, NUL 누락/추가 구분, 첫4서브키와 1R/4R/28R KAT·역변환·실패 출력보존; CTest 8/8
-| 11 | `feat: add immutable key contexts` | 대기 | — |
+| 10 | `feat: expand complete round key schedules` | 완료 | `a211de0f77ea4505de38f5962dc0389ef5cf73a3` / 448B 전체 일정·LE32·NUL 하나 확인, NUL 누락/추가 구분, 첫4서브키와 1R/4R/28R KAT·역변환·실패 출력보존; CTest 8/8
+| 11 | `feat: add immutable key contexts` | 완료 | opaque 컨텍스트 생성·불변 일정·소거/해제; 원본 키 변경 독립성, 슬롯/키 중첩·기존 슬롯 보존, malloc/EVP 6개 실패경로; CTest 9/9
 | 12 | `feat: expose full-round block encryption` | 대기 | — |
 | 13 | `feat: expose full-round block decryption` | 대기 | — |
 | 14 | `test: add independent reference oracle` | 대기 | — |

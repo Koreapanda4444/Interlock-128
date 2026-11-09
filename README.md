@@ -6,6 +6,6 @@
 
 구현 검증은 암호학적 안전성 증명이 아닙니다. 실제 기밀 보호 용도로 승인된 암호가 아닙니다. GUI, 파일 암호화, 운용모드와 AEAD는 범위에서 제외합니다.
 
-진행 상태는 [docs/progress_ko.md](docs/progress_ko.md)에서 확인합니다. 빌드·검증 명령은 해당 기능이 추가되는 단계에서 안내합니다.
+진행 상태는 [docs/progress_ko.md](docs/progress_ko.md)에서 확인합니다. 빌드·검증 명령은 [docs/build_ko.md](docs/build_ko.md), 공개 API의 수명·오류 계약은 [docs/api_ko.md](docs/api_ko.md)를 참고합니다.
 
 배포 라이선스는 소유자가 아직 선택하지 않았습니다. 공개 배포 전 확인해야 합니다. OpenSSL 등 의존성의 라이선스는 별도로 적용됩니다.

@@ -3,6 +3,8 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <limits.h>
+#include "interlock.h"
+struct interlock_key_ctx { uint32_t round_key[28][4]; };
 _Static_assert(CHAR_BIT == 8 && sizeof(uint32_t) == 4, "unsupported integer platform");
 #ifndef UINTPTR_MAX
 #error Interlock requires uintptr_t and flat address representations
