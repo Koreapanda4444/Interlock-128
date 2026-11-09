@@ -32,6 +32,7 @@ int il_shake256(const il_span *parts, size_t count, uint8_t *output, size_t leng
 void il_cleanse(void *p, size_t length);
 #ifdef INTERLOCK_TESTING
 extern int il_test_failure;
+uint32_t il_test_substitute(uint32_t x);
 #define IL_FAIL(point) (il_test_failure == (point))
 #else
 #define IL_FAIL(point) 0

@@ -10,8 +10,8 @@
 | 2 | `feat: configure portable c11 build` | 완료 | `8682d0dcdaf07ad42d703194df80ea7f9a5c3364` / GCC 13.3, OpenSSL 3.0.13, CMake 4.4.4; fresh build·CTest 1/1 |
 | 3 | `feat: add defined word and buffer operations` | 완료 | `151d56a5aee5e0b58afa84552d75c3354f9a9dad` / LE 비정렬·sentinel, 0/1/31/32 회전, 범위 overflow 및 ±1..15 중첩; CTest 2/2
 | 4 | `feat: add verified shake256 adapter` | 완료 | `2871682f80708c0215c3aa92be18d296181748a5` / SHAKE256 빈 입력64B 고정 KAT, 448B 단일 final, 분할 update 일치; 할당·EVP 5개 실패지점 출력 보존; CTest 3/3
-| 5 | `test: establish cross-platform build checks` | 완료 | Linux GCC/Clang・Windows MSVC x64・macOS CI設定; YAML検査・fresh GCC build/CTest 3/3; 他OSの実行結果は次段階開始時確認
-| 6 | `feat: implement constant-time nibble substitution` | 대기 | — |
+| 5 | `test: establish cross-platform build checks` | 완료 | `526221f6ba081fcd6b1807a3c12c92ed2183a876` / Linux GCC/Clang·Windows MSVC x64·macOS CI 설정; YAML 검사·fresh GCC build/CTest 3/3; 원격 실행 상태는 아래 기록
+| 6 | `feat: implement constant-time nibble substitution` | 완료 | S-box Boolean ANF, 16입력×8위치×4배경 전수 대조·인접 니블 보존; CTest 4/4
 | 7 | `feat: implement linear and nonlinear mixing` | 대기 | — |
 | 8 | `feat: implement ordered forward rounds` | 대기 | — |
 | 9 | `feat: implement reverse round transitions` | 대기 | — |
@@ -38,3 +38,5 @@
 | 30 | `docs: report reproducible performance results` | 대기 | — |
 | 31 | `docs: finalize implementation and research handoff` | 대기 | — |
 | 32 | `test: verify clean-checkout acceptance` | 대기 | — |
+
+CI 5번 (`526221f`): Linux GCC/Clang 성공; Windows는 OpenSSL 설치 중, macOS는 러너 대기. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42648381420).
