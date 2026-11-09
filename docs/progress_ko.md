@@ -18,8 +18,8 @@
 | 8 | `feat: implement ordered forward rounds` | 완료 | `6e2250253a661e0b3c8391d2bc1786714e0ed20a` / 순서 의존 XOR 갱신과 회전·재배열, 0블록·첫4서브키 1R KAT 및 재배열 전 4워드 일치; CTest 6/6
 | 9 | `feat: implement reverse round transitions` | 완료 | `f8b0bb4e25f4a0e6b471c5ac26f47e11837b473a` / 역회전·역갱신; 4,096개 상태·서브키의 양방향 1R 왕복과 별도 기준식 일치; CTest 7/7
 | 10 | `feat: expand complete round key schedules` | 완료 | `a211de0f77ea4505de38f5962dc0389ef5cf73a3` / 448B 전체 일정·LE32·NUL 하나 확인, NUL 누락/추가 구분, 첫4서브키와 1R/4R/28R KAT·역변환·실패 출력보존; CTest 8/8
-| 11 | `feat: add immutable key contexts` | 완료 | opaque 컨텍스트 생성·불변 일정·소거/해제; 원본 키 변경 독립성, 슬롯/키 중첩·기존 슬롯 보존, malloc/EVP 6개 실패경로; CTest 9/9
-| 12 | `feat: expose full-round block encryption` | 대기 | — |
+| 11 | `feat: add immutable key contexts` | 완료 | `58575750dbc99d89f26b08823ee09f9d6ffdcaaf` / opaque 컨텍스트 생성·불변 일정·소거/해제; 원본 키 변경 독립성, 슬롯/키 중첩·기존 슬롯 보존, malloc/EVP 6개 실패경로; CTest 9/9
+| 12 | `feat: expose full-round block encryption` | 완료 | 전체28R 공개 암호화; 네 KAT, 비정렬·exact in-place·경계 sentinel, 길이/용량/NULL/±1..15 겹침 오류와 출력 보존; CTest 10/10
 | 13 | `feat: expose full-round block decryption` | 대기 | — |
 | 14 | `test: add independent reference oracle` | 대기 | — |
 | 15 | `test: compare all round prefixes` | 대기 | — |

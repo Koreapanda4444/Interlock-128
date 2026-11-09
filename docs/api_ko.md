@@ -10,4 +10,10 @@
 
 `interlock_key_ctx_free(NULL)`은 아무 작업도 하지 않습니다. 정상 컨텍스트는 소유한 일정을 `OPENSSL_cleanse`로 소거한 후 해제합니다. 호출자는 해제 뒤 포인터를 NULL로 바꾸어야 합니다. 해제 후 사용, 이중 해제, 초기화하지 않은 포인터는 지원하지 않습니다. 소거는 레지스터·운영체제 사본·덤프까지 없앤다는 보장이 아닙니다.
 
-현재 11번까지는 생성·해제가 구현되어 있습니다. 전체 28라운드 암호화·복호화는 각각 12·13번에서 추가합니다. 독립 Python oracle, 전체 prefix 비교, sanitizer, 외부 소비자, 코드 경로 감사와 연구·성능 검증은 이후 계획입니다.
+`interlock_encrypt_block(ctx, input, 16, output, output_capacity)`는 전체 28라운드만 처리합니다. 세 포인터는 비NULL이어야 합니다. 입력 길이는 정확히 16, 출력 용량은 16 이상이어야 합니다. 성공 시 처음 16바이트만 쓰고 뒤쪽 용량을 보존합니다.
+
+정확히 같은 시작 주소인 in-place를 지원합니다. 서로 다른 시작 주소에서 16바이트 범위가 일부 겹치면 `INTERLOCK_EOVERLAP`입니다. 유효한 객체의 평탄 주소를 `uintptr_t`로 표현해 끝 주소 overflow를 검사하며 다른 객체 포인터의 비교·뺄셈은 사용하지 않습니다. 검증을 끝낸 후 로컬 상태에서 계산하고 마지막에 출력합니다. 오류 반환 시 출력은 전혀 변경하지 않습니다. 컨텍스트 내부 저장소와 입출력을 의도적으로 겹치지 않는 것은 호출자의 전제입니다.
+
+상태 값은 성공 `INTERLOCK_OK`, NULL·기존 슬롯 등의 잘못된 인자 `INTERLOCK_EINVAL`, 길이 `INTERLOCK_ELENGTH`, 작은 용량 `INTERLOCK_ECAPACITY`, 겹침 `INTERLOCK_EOVERLAP`, 할당 실패 `INTERLOCK_ENOMEM`, OpenSSL 연산 실패 `INTERLOCK_ECRYPTO`입니다. 여러 오류가 함께 있을 때 우선순위는 계약하지 않습니다.
+
+현재 12번까지 생성·해제·암호화가 구현되어 있습니다. 복호화는 13번에서 추가합니다. 독립 Python oracle, 전체 prefix 비교, sanitizer, 외부 소비자, 코드 경로 감사와 연구·성능 검증은 이후 계획입니다.

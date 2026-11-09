@@ -1,4 +1,5 @@
 #include "internal.h"
+#include <string.h>
 /* PRESENT ANF evaluated on eight independent nibble lanes. */
 static uint32_t il_substitute(uint32_t x) {
     const uint32_t lanes = UINT32_C(0x11111111);
@@ -51,6 +52,33 @@ static inline void il_reverse_round(uint32_t state[4], const uint32_t k[4]) {
     c ^= il_fm(d, k[1]);
     a ^= il_fs(b, k[0]);
     state[0] = a; state[1] = b; state[2] = c; state[3] = d;
+}
+static interlock_status il_validate_block(
+    const interlock_key_ctx *ctx, const uint8_t *input, size_t input_len,
+    uint8_t *output, size_t output_capacity) {
+    int overlap;
+    if (ctx == NULL || input == NULL || output == NULL) return INTERLOCK_EINVAL;
+    if (input_len != INTERLOCK_BLOCK_BYTES) return INTERLOCK_ELENGTH;
+    if (output_capacity < INTERLOCK_BLOCK_BYTES) return INTERLOCK_ECAPACITY;
+    overlap = il_ranges_overlap(input, INTERLOCK_BLOCK_BYTES, output, INTERLOCK_BLOCK_BYTES);
+    if (overlap < 0) return INTERLOCK_EINVAL;
+    if (input != output && overlap != 0) return INTERLOCK_EOVERLAP;
+    return INTERLOCK_OK;
+}
+interlock_status interlock_encrypt_block(
+    const interlock_key_ctx *ctx, const uint8_t *input, size_t input_len,
+    uint8_t *output, size_t output_capacity) {
+    uint32_t state[4];
+    uint8_t block[INTERLOCK_BLOCK_BYTES];
+    interlock_status status = il_validate_block(ctx, input, input_len, output, output_capacity);
+    if (status != INTERLOCK_OK) return status;
+    for (size_t j = 0; j < 4; ++j) state[j] = il_load32(input + 4*j);
+    for (size_t r = 0; r < 28; ++r) il_forward_round(state, ctx->round_key[r]);
+    for (size_t j = 0; j < 4; ++j) il_store32(block + 4*j, state[j]);
+    memcpy(output, block, sizeof(block));
+    il_cleanse(state, sizeof(state));
+    il_cleanse(block, sizeof(block));
+    return INTERLOCK_OK;
 }
 #ifdef INTERLOCK_TESTING
 uint32_t il_test_substitute(uint32_t x) { return il_substitute(x); }
