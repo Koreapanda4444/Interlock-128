@@ -33,6 +33,9 @@ void il_cleanse(void *p, size_t length);
 #ifdef INTERLOCK_TESTING
 extern int il_test_failure;
 uint32_t il_test_substitute(uint32_t x);
+uint32_t il_test_l32(uint32_t x);
+uint32_t il_test_fs(uint32_t x, uint32_t k);
+uint32_t il_test_fm(uint32_t x, uint32_t k);
 #define IL_FAIL(point) (il_test_failure == (point))
 #else
 #define IL_FAIL(point) 0
