@@ -30,6 +30,7 @@ typedef struct { const uint8_t *data; size_t length; } il_span;
 /* 1: success, 0: EVP failure, -1: invalid arguments, -2: allocation failure. */
 int il_shake256(const il_span *parts, size_t count, uint8_t *output, size_t length);
 void il_cleanse(void *p, size_t length);
+int il_expand_key(const uint8_t *key, size_t key_length, uint32_t round_key[28][4]);
 #ifdef INTERLOCK_TESTING
 extern int il_test_failure;
 uint32_t il_test_substitute(uint32_t x);

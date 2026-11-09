@@ -14,8 +14,8 @@
 | 6 | `feat: implement constant-time nibble substitution` | 완료 | `68b6e1f7b578f3e823fc3d2023966f76842849e9` / S-box Boolean ANF, 16입력×8위치×4배경 전수 대조·인접 니블 보존; CTest 4/4
 | 7 | `feat: implement linear and nonlinear mixing` | 완료 | `631cfcf3b7ba90f920c0a89ef55937ac5d58b974` / L32/FS/FM 독립 C 기준식, 단일비트·최댓값·carry 경계 42×42 및 고정 1,024쌍 대조; CTest 5/5
 | 8 | `feat: implement ordered forward rounds` | 완료 | `6e2250253a661e0b3c8391d2bc1786714e0ed20a` / 순서 의존 XOR 갱신과 회전·재배열, 0블록·첫4서브키 1R KAT 및 재배열 전 4워드 일치; CTest 6/6
-| 9 | `feat: implement reverse round transitions` | 완료 | 역회전·역갱신; 4,096개 상태·서브키의 양방향 1R 왕복과 별도 기준식 일치; CTest 7/7
-| 10 | `feat: expand complete round key schedules` | 대기 | — |
+| 9 | `feat: implement reverse round transitions` | 완료 | `f8b0bb4e25f4a0e6b471c5ac26f47e11837b473a` / 역회전·역갱신; 4,096개 상태·서브키의 양방향 1R 왕복과 별도 기준식 일치; CTest 7/7
+| 10 | `feat: expand complete round key schedules` | 완료 | 448B 전체 일정·LE32·NUL 하나 확인, NUL 누락/추가 구분, 첫4서브키와 1R/4R/28R KAT·역변환·실패 출력보존; CTest 8/8
 | 11 | `feat: add immutable key contexts` | 대기 | — |
 | 12 | `feat: expose full-round block encryption` | 대기 | — |
 | 13 | `feat: expose full-round block decryption` | 대기 | — |
