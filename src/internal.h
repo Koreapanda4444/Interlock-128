@@ -26,4 +26,14 @@ static inline void il_store32(uint8_t *p, uint32_t x) {
 int il_range_end(uintptr_t start, size_t length, uintptr_t *end);
 /* -1: integer overflow, 0: disjoint, 1: overlap. Valid objects remain required. */
 int il_ranges_overlap(const void *a, size_t na, const void *b, size_t nb);
+typedef struct { const uint8_t *data; size_t length; } il_span;
+/* 1: success, 0: EVP failure, -1: invalid arguments, -2: allocation failure. */
+int il_shake256(const il_span *parts, size_t count, uint8_t *output, size_t length);
+void il_cleanse(void *p, size_t length);
+#ifdef INTERLOCK_TESTING
+extern int il_test_failure;
+#define IL_FAIL(point) (il_test_failure == (point))
+#else
+#define IL_FAIL(point) 0
+#endif
 #endif

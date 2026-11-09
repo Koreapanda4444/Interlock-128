@@ -8,8 +8,8 @@
 | ---: | --- | --- | --- |
 | 1 | `docs: define clean-room implementation scope` | 완료 | `35ea2194af3673530ffbbc7a80d55c77bbdb1706` / 규범 사양·32개 계획 반영; README·진행표는 2번과 반영 |
 | 2 | `feat: configure portable c11 build` | 완료 | `8682d0dcdaf07ad42d703194df80ea7f9a5c3364` / GCC 13.3, OpenSSL 3.0.13, CMake 4.4.4; fresh build·CTest 1/1 |
-| 3 | `feat: add defined word and buffer operations` | 완료 | LE 비정렬·sentinel, 0/1/31/32 회전, 범위 overflow 및 ±1..15 중첩; CTest 2/2
-| 4 | `feat: add verified shake256 adapter` | 대기 | — |
+| 3 | `feat: add defined word and buffer operations` | 완료 | `151d56a5aee5e0b58afa84552d75c3354f9a9dad` / LE 비정렬·sentinel, 0/1/31/32 회전, 범위 overflow 및 ±1..15 중첩; CTest 2/2
+| 4 | `feat: add verified shake256 adapter` | 완료 | SHAKE256 빈 입력64B 고정 KAT, 448B 단일 final, 분할 update 일치; 할당·EVP 5개 실패지점 출력 보존; CTest 3/3
 | 5 | `test: establish cross-platform build checks` | 대기 | — |
 | 6 | `feat: implement constant-time nibble substitution` | 대기 | — |
 | 7 | `feat: implement linear and nonlinear mixing` | 대기 | — |
