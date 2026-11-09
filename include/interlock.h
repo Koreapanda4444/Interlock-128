@@ -27,6 +27,10 @@ interlock_status interlock_encrypt_block(
     const interlock_key_ctx *ctx,
     const uint8_t *input, size_t input_len,
     uint8_t *output, size_t output_capacity);
+interlock_status interlock_decrypt_block(
+    const interlock_key_ctx *ctx,
+    const uint8_t *input, size_t input_len,
+    uint8_t *output, size_t output_capacity);
 #ifdef __cplusplus
 }
 #endif

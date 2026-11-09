@@ -16,4 +16,6 @@
 
 상태 값은 성공 `INTERLOCK_OK`, NULL·기존 슬롯 등의 잘못된 인자 `INTERLOCK_EINVAL`, 길이 `INTERLOCK_ELENGTH`, 작은 용량 `INTERLOCK_ECAPACITY`, 겹침 `INTERLOCK_EOVERLAP`, 할당 실패 `INTERLOCK_ENOMEM`, OpenSSL 연산 실패 `INTERLOCK_ECRYPTO`입니다. 여러 오류가 함께 있을 때 우선순위는 계약하지 않습니다.
 
-현재 12번까지 생성·해제·암호화가 구현되어 있습니다. 복호화는 13번에서 추가합니다. 독립 Python oracle, 전체 prefix 비교, sanitizer, 외부 소비자, 코드 경로 감사와 연구·성능 검증은 이후 계획입니다.
+`interlock_decrypt_block`은 같은 인자·길이·용량·겹침·출력 보존 계약으로 전체 28라운드를 역순 처리합니다. 추가 swap, whitening, 패딩, 운용모드는 없습니다. 공개 API에는 라운드 수나 중간 상태를 요청하는 인자가 없습니다.
+
+13번까지 생성·해제·전체 28라운드 암호화·복호화가 구현되어 있습니다. 독립 Python oracle, 전체 prefix 비교, sanitizer, 외부 소비자, 코드 경로 감사와 연구·성능 검증은 이후 계획입니다.

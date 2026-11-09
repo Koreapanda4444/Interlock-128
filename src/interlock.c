@@ -80,6 +80,21 @@ interlock_status interlock_encrypt_block(
     il_cleanse(block, sizeof(block));
     return INTERLOCK_OK;
 }
+interlock_status interlock_decrypt_block(
+    const interlock_key_ctx *ctx, const uint8_t *input, size_t input_len,
+    uint8_t *output, size_t output_capacity) {
+    uint32_t state[4];
+    uint8_t block[INTERLOCK_BLOCK_BYTES];
+    interlock_status status = il_validate_block(ctx, input, input_len, output, output_capacity);
+    if (status != INTERLOCK_OK) return status;
+    for (size_t j = 0; j < 4; ++j) state[j] = il_load32(input + 4*j);
+    for (size_t r = 28; r-- > 0;) il_reverse_round(state, ctx->round_key[r]);
+    for (size_t j = 0; j < 4; ++j) il_store32(block + 4*j, state[j]);
+    memcpy(output, block, sizeof(block));
+    il_cleanse(state, sizeof(state));
+    il_cleanse(block, sizeof(block));
+    return INTERLOCK_OK;
+}
 #ifdef INTERLOCK_TESTING
 uint32_t il_test_substitute(uint32_t x) { return il_substitute(x); }
 uint32_t il_test_l32(uint32_t x) { return il_l32(x); }

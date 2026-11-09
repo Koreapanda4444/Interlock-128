@@ -19,8 +19,8 @@
 | 9 | `feat: implement reverse round transitions` | 완료 | `f8b0bb4e25f4a0e6b471c5ac26f47e11837b473a` / 역회전·역갱신; 4,096개 상태·서브키의 양방향 1R 왕복과 별도 기준식 일치; CTest 7/7
 | 10 | `feat: expand complete round key schedules` | 완료 | `a211de0f77ea4505de38f5962dc0389ef5cf73a3` / 448B 전체 일정·LE32·NUL 하나 확인, NUL 누락/추가 구분, 첫4서브키와 1R/4R/28R KAT·역변환·실패 출력보존; CTest 8/8
 | 11 | `feat: add immutable key contexts` | 완료 | `58575750dbc99d89f26b08823ee09f9d6ffdcaaf` / opaque 컨텍스트 생성·불변 일정·소거/해제; 원본 키 변경 독립성, 슬롯/키 중첩·기존 슬롯 보존, malloc/EVP 6개 실패경로; CTest 9/9
-| 12 | `feat: expose full-round block encryption` | 완료 | 전체28R 공개 암호화; 네 KAT, 비정렬·exact in-place·경계 sentinel, 길이/용량/NULL/±1..15 겹침 오류와 출력 보존; CTest 10/10
-| 13 | `feat: expose full-round block decryption` | 대기 | — |
+| 12 | `feat: expose full-round block encryption` | 완료 | `5ba9dcc39a68f81ff7fa1422815f847b3d24b18a` / 전체28R 공개 암호화; 네 KAT, 비정렬·exact in-place·경계 sentinel, 길이/용량/NULL/±1..15 겹침 오류와 출력 보존; CTest 10/10
+| 13 | `feat: expose full-round block decryption` | 완료 | 네 KAT 복호화·양방향 in-place·입력/후방 sentinel 보존·오류 출력불변; CTest 11/11; BUILD_TESTING=OFF 제품 빌드·테스트 진입점 부재 확인
 | 14 | `test: add independent reference oracle` | 대기 | — |
 | 15 | `test: compare all round prefixes` | 대기 | — |
 | 16 | `test: cover buffer and lifetime contracts` | 대기 | — |
@@ -46,3 +46,7 @@ CI 5번 (`526221f`): Linux GCC/Clang 성공; Windows는 OpenSSL 설치 중, macO
 CI 6번 (`68b6e1f`): Linux GCC/Clang·macOS 성공, Windows 실행 중. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42649477240).
 
 CI 5번 (`526221f`): Linux GCC·Clang, Windows MSVC x64, macOS 모두 성공 확인.
+
+CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 대기. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42655876272). 최종 13번 SHA와 CI 상태는 인계 응답에서 보고합니다.
+
+요청 종료 범위: 13번. 14~32번은 미구현이며, 독립 oracle·전체 prefix 대조·sanitizer·암호분석·성능·최종 인수 완료로 해석하지 않습니다.

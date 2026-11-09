@@ -9,3 +9,22 @@
 진행 상태는 [docs/progress_ko.md](docs/progress_ko.md)에서 확인합니다. 빌드·검증 명령은 [docs/build_ko.md](docs/build_ko.md), 공개 API의 수명·오류 계약은 [docs/api_ko.md](docs/api_ko.md)를 참고합니다.
 
 배포 라이선스는 소유자가 아직 선택하지 않았습니다. 공개 배포 전 확인해야 합니다. OpenSSL 등 의존성의 라이선스는 별도로 적용됩니다.
+
+현재 요청 범위인 **1~13번**은 생성·해제와 전체 28라운드 암호화·복호화 API, 네 고정 벡터 및 버퍼 계약 검사를 포함합니다. 14~32번의 독립 oracle·전체 prefix 대조·sanitizer·암호분석·성능 평가는 아직 완료하지 않았습니다.
+
+```c
+#include <interlock.h>
+#include <string.h>
+int main(void) {
+    uint8_t key[32] = {0}, plaintext[16] = {0}, ciphertext[16], recovered[16];
+    interlock_key_ctx *ctx = NULL;
+    interlock_status status = interlock_key_ctx_create(&ctx, key, sizeof(key));
+    if (status != INTERLOCK_OK) return 1;
+    status = interlock_encrypt_block(ctx, plaintext, sizeof(plaintext), ciphertext, sizeof(ciphertext));
+    if (status == INTERLOCK_OK)
+        status = interlock_decrypt_block(ctx, ciphertext, sizeof(ciphertext), recovered, sizeof(recovered));
+    interlock_key_ctx_free(ctx);
+    ctx = NULL;
+    return status != INTERLOCK_OK || memcmp(plaintext, recovered, sizeof(plaintext)) != 0;
+}
+```
