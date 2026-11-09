@@ -12,8 +12,8 @@
 | 4 | `feat: add verified shake256 adapter` | 완료 | `2871682f80708c0215c3aa92be18d296181748a5` / SHAKE256 빈 입력64B 고정 KAT, 448B 단일 final, 분할 update 일치; 할당·EVP 5개 실패지점 출력 보존; CTest 3/3
 | 5 | `test: establish cross-platform build checks` | 완료 | `526221f6ba081fcd6b1807a3c12c92ed2183a876` / Linux GCC/Clang·Windows MSVC x64·macOS CI 설정; YAML 검사·fresh GCC build/CTest 3/3; 원격 실행 상태는 아래 기록
 | 6 | `feat: implement constant-time nibble substitution` | 완료 | `68b6e1f7b578f3e823fc3d2023966f76842849e9` / S-box Boolean ANF, 16입력×8위치×4배경 전수 대조·인접 니블 보존; CTest 4/4
-| 7 | `feat: implement linear and nonlinear mixing` | 완료 | L32/FS/FM 독립 C 기준식, 단일비트·최댓값·carry 경계 42×42 및 고정 1,024쌍 대조; CTest 5/5
-| 8 | `feat: implement ordered forward rounds` | 대기 | — |
+| 7 | `feat: implement linear and nonlinear mixing` | 완료 | `631cfcf3b7ba90f920c0a89ef55937ac5d58b974` / L32/FS/FM 독립 C 기준식, 단일비트·최댓값·carry 경계 42×42 및 고정 1,024쌍 대조; CTest 5/5
+| 8 | `feat: implement ordered forward rounds` | 완료 | 순서 의존 XOR 갱신과 회전·재배열, 0블록·첫4서브키 1R KAT 및 재배열 전 4워드 일치; CTest 6/6
 | 9 | `feat: implement reverse round transitions` | 대기 | — |
 | 10 | `feat: expand complete round key schedules` | 대기 | — |
 | 11 | `feat: add immutable key contexts` | 대기 | — |
@@ -42,3 +42,5 @@
 CI 5번 (`526221f`): Linux GCC/Clang 성공; Windows는 OpenSSL 설치 중, macOS는 러너 대기. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42648381420).
 
 CI 6번 (`68b6e1f`): Linux GCC/Clang·macOS 성공, Windows 실행 중. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42649477240).
+
+CI 5번 (`526221f`): Linux GCC·Clang, Windows MSVC x64, macOS 모두 성공 확인.

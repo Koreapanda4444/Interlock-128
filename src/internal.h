@@ -36,6 +36,8 @@ uint32_t il_test_substitute(uint32_t x);
 uint32_t il_test_l32(uint32_t x);
 uint32_t il_test_fs(uint32_t x, uint32_t k);
 uint32_t il_test_fm(uint32_t x, uint32_t k);
+void il_test_forward_xors(uint32_t state[4], const uint32_t k[4]);
+void il_test_forward_round(uint32_t state[4], const uint32_t k[4]);
 #define IL_FAIL(point) (il_test_failure == (point))
 #else
 #define IL_FAIL(point) 0

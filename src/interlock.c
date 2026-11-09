@@ -26,9 +26,26 @@ static uint32_t il_fm(uint32_t x, uint32_t k) {
     uint32_t w = il_rol32((uint32_t)(u + v), 11) ^ il_rol32(y & il_rol32(k, 3), 19);
     return il_l32(il_substitute(w ^ il_rol32(k, 13)));
 }
+static void il_forward_xors(uint32_t state[4], const uint32_t k[4]) {
+    state[0] ^= il_fs(state[1], k[0]);
+    state[2] ^= il_fm(state[3], k[1]);
+    state[1] ^= il_fm(state[2], k[2]);
+    state[3] ^= il_fs(state[0], k[3]);
+}
+static void il_forward_round(uint32_t state[4], const uint32_t k[4]) {
+    uint32_t a, b, c, d;
+    il_forward_xors(state, k);
+    a = state[0]; b = state[1]; c = state[2]; d = state[3];
+    state[0] = il_rol32(c, 5);
+    state[1] = il_rol32(a, 13);
+    state[2] = il_rol32(d, 21);
+    state[3] = il_rol32(b, 27);
+}
 #ifdef INTERLOCK_TESTING
 uint32_t il_test_substitute(uint32_t x) { return il_substitute(x); }
 uint32_t il_test_l32(uint32_t x) { return il_l32(x); }
 uint32_t il_test_fs(uint32_t x, uint32_t k) { return il_fs(x, k); }
 uint32_t il_test_fm(uint32_t x, uint32_t k) { return il_fm(x, k); }
+void il_test_forward_xors(uint32_t state[4], const uint32_t k[4]) { il_forward_xors(state, k); }
+void il_test_forward_round(uint32_t state[4], const uint32_t k[4]) { il_forward_round(state, k); }
 #endif
