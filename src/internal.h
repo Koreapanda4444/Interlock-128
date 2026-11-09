@@ -1,0 +1,29 @@
+#ifndef INTERLOCK_INTERNAL_H
+#define INTERLOCK_INTERNAL_H
+#include <stddef.h>
+#include <stdint.h>
+#include <limits.h>
+_Static_assert(CHAR_BIT == 8 && sizeof(uint32_t) == 4, "unsupported integer platform");
+#ifndef UINTPTR_MAX
+#error Interlock requires uintptr_t and flat address representations
+#endif
+static inline uint32_t il_rol32(uint32_t x, unsigned n) {
+    n &= 31u;
+    return (x << n) | (x >> ((32u - n) & 31u));
+}
+static inline uint32_t il_ror32(uint32_t x, unsigned n) {
+    n &= 31u;
+    return (x >> n) | (x << ((32u - n) & 31u));
+}
+static inline uint32_t il_load32(const uint8_t *p) {
+    return (uint32_t)p[0] | ((uint32_t)p[1] << 8) |
+           ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
+}
+static inline void il_store32(uint8_t *p, uint32_t x) {
+    p[0] = (uint8_t)x; p[1] = (uint8_t)(x >> 8);
+    p[2] = (uint8_t)(x >> 16); p[3] = (uint8_t)(x >> 24);
+}
+int il_range_end(uintptr_t start, size_t length, uintptr_t *end);
+/* -1: integer overflow, 0: disjoint, 1: overlap. Valid objects remain required. */
+int il_ranges_overlap(const void *a, size_t na, const void *b, size_t nb);
+#endif

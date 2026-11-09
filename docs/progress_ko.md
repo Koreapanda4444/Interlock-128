@@ -7,8 +7,8 @@
 | 번호 | 제목 | 상태 | 완료 SHA / 검증 |
 | ---: | --- | --- | --- |
 | 1 | `docs: define clean-room implementation scope` | 완료 | `35ea2194af3673530ffbbc7a80d55c77bbdb1706` / 규범 사양·32개 계획 반영; README·진행표는 2번과 반영 |
-| 2 | `feat: configure portable c11 build` | 완료 | GCC 13.3, OpenSSL 3.0.13, CMake 4.4.4; fresh build·CTest 1/1 |
-| 3 | `feat: add defined word and buffer operations` | 대기 | — |
+| 2 | `feat: configure portable c11 build` | 완료 | `8682d0dcdaf07ad42d703194df80ea7f9a5c3364` / GCC 13.3, OpenSSL 3.0.13, CMake 4.4.4; fresh build·CTest 1/1 |
+| 3 | `feat: add defined word and buffer operations` | 완료 | LE 비정렬·sentinel, 0/1/31/32 회전, 범위 overflow 및 ±1..15 중첩; CTest 2/2
 | 4 | `feat: add verified shake256 adapter` | 대기 | — |
 | 5 | `test: establish cross-platform build checks` | 대기 | — |
 | 6 | `feat: implement constant-time nibble substitution` | 대기 | — |
