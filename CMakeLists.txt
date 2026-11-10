@@ -85,4 +85,17 @@ if(BUILD_TESTING)
   target_link_libraries(test_decrypt PRIVATE interlock)
   add_test(NAME decrypt COMMAND test_decrypt)
   add_test(NAME reference COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/reference.py)
+  add_executable(vector_runner tests/vector_runner.c)
+  target_link_libraries(vector_runner PRIVATE interlock)
+  add_executable(prefix_runner tests/vector_runner.c)
+  target_compile_definitions(prefix_runner PRIVATE INTERLOCK_TESTING IL_PREFIX_DRIVER)
+  target_include_directories(prefix_runner PRIVATE src)
+  target_link_libraries(prefix_runner PRIVATE interlock_testcore)
+  set(INTERLOCK_DIFFERENTIAL_COMMAND ${Python3_EXECUTABLE}
+      ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_differential.py
+      --prefix-runner $<TARGET_FILE:prefix_runner> --vector-runner $<TARGET_FILE:vector_runner>)
+  add_test(NAME differential COMMAND ${INTERLOCK_DIFFERENTIAL_COMMAND})
+  set_tests_properties(differential PROPERTIES TIMEOUT 300)
+  add_custom_target(check-differential COMMAND ${INTERLOCK_DIFFERENTIAL_COMMAND}
+      DEPENDS prefix_runner vector_runner VERBATIM)
 endif()
