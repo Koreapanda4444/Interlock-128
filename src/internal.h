@@ -35,6 +35,9 @@ void il_cleanse(void *p, size_t length);
 int il_expand_key(const uint8_t *key, size_t key_length, uint32_t round_key[28][4]);
 #ifdef INTERLOCK_TESTING
 extern int il_test_failure;
+extern size_t il_test_cleanse_calls;
+extern size_t il_test_cleanse_bytes;
+extern int il_test_cleanse_zero;
 uint32_t il_test_substitute(uint32_t x);
 uint32_t il_test_l32(uint32_t x);
 uint32_t il_test_fs(uint32_t x, uint32_t k);

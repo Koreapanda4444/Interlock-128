@@ -4,6 +4,9 @@
 #include <string.h>
 #ifdef INTERLOCK_TESTING
 int il_test_failure = 0;
+size_t il_test_cleanse_calls = 0;
+size_t il_test_cleanse_bytes = 0;
+int il_test_cleanse_zero = 1;
 #endif
 int il_range_end(uintptr_t start, size_t length, uintptr_t *end) {
     if (length > UINTPTR_MAX - start) return 0;
@@ -15,7 +18,15 @@ int il_ranges_overlap(const void *a, size_t na, const void *b, size_t nb) {
     if (!il_range_end(sa, na, &ea) || !il_range_end(sb, nb, &eb)) return -1;
     return na != 0 && nb != 0 && sa < eb && sb < ea;
 }
-void il_cleanse(void *p, size_t length) { OPENSSL_cleanse(p, length); }
+void il_cleanse(void *p, size_t length) {
+    OPENSSL_cleanse(p, length);
+#ifdef INTERLOCK_TESTING
+    ++il_test_cleanse_calls;
+    il_test_cleanse_bytes += length;
+    for (size_t j = 0; j < length; ++j)
+        if (((const volatile unsigned char*)p)[j] != 0) il_test_cleanse_zero = 0;
+#endif
+}
 int il_shake256(const il_span *parts, size_t count, uint8_t *output, size_t length) {
     EVP_MD_CTX *ctx = NULL;
     uint8_t *temporary;
