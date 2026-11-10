@@ -1,0 +1,19 @@
+{
+  "algorithm": "Interlock-128",
+  "rounds": 28,
+  "key_bytes": 32,
+  "block_bytes": 16,
+  "shake256_empty_64": "46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762fd75dc4ddd8c0f200cb05019d67b592f6fc821c49479ab48640292eacb3b7c4be",
+  "zero_key_first_round_words": ["634a205d", "d56cc590", "d6cf518c", "9c8022bf"],
+  "zero_prefixes": {
+    "1": "bc3f5fdced85606be7d9ad9f4bd37a1e",
+    "4": "44045d030a10d4ccae45aa9b54964b1a",
+    "28": "46272f4086f471ad8a7ec9c9917912bb"
+  },
+  "vectors": [
+    {"key": "0000000000000000000000000000000000000000000000000000000000000000", "plaintext": "00000000000000000000000000000000", "ciphertext": "46272f4086f471ad8a7ec9c9917912bb"},
+    {"key": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f", "plaintext": "000102030405060708090a0b0c0d0e0f", "ciphertext": "55b8e32c0f8b46ab083cb4a21150c3e8"},
+    {"key": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff", "plaintext": "ffffffffffffffffffffffffffffffff", "ciphertext": "f8c5d0db5d69b06a2ef4398b6b4f55d6"},
+    {"key": "0000000000000000000000000000000000000000000000000000000000000000", "plaintext": "01000000000000000000000000000000", "ciphertext": "52e7cbd4aa223cdbf3232c0f9c1b75e0"}
+  ]
+}

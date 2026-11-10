@@ -1,6 +1,6 @@
 # 구현 진행표
 
-이번 요청 범위는 **1~13번**이며, 14~32번은 후속 작업으로 남깁니다.
+이번 요청 범위는 **14~19번**이며, 1~13번에 이어 진행합니다. 20~32번은 후속 작업으로 남깁니다.
 
 대상: `Koreapanda4444/Interlock-128`, `main`. 원격 비어 있음과 push 권한 확인. 이전 코어 미승계.
 
@@ -20,8 +20,8 @@
 | 10 | `feat: expand complete round key schedules` | 완료 | `a211de0f77ea4505de38f5962dc0389ef5cf73a3` / 448B 전체 일정·LE32·NUL 하나 확인, NUL 누락/추가 구분, 첫4서브키와 1R/4R/28R KAT·역변환·실패 출력보존; CTest 8/8
 | 11 | `feat: add immutable key contexts` | 완료 | `58575750dbc99d89f26b08823ee09f9d6ffdcaaf` / opaque 컨텍스트 생성·불변 일정·소거/해제; 원본 키 변경 독립성, 슬롯/키 중첩·기존 슬롯 보존, malloc/EVP 6개 실패경로; CTest 9/9
 | 12 | `feat: expose full-round block encryption` | 완료 | `5ba9dcc39a68f81ff7fa1422815f847b3d24b18a` / 전체28R 공개 암호화; 네 KAT, 비정렬·exact in-place·경계 sentinel, 길이/용량/NULL/±1..15 겹침 오류와 출력 보존; CTest 10/10
-| 13 | `feat: expose full-round block decryption` | 완료 | 네 KAT 복호화·양방향 in-place·입력/후방 sentinel 보존·오류 출력불변; CTest 11/11; BUILD_TESTING=OFF 제품 빌드·테스트 진입점 부재 확인
-| 14 | `test: add independent reference oracle` | 대기 | — |
+| 13 | `feat: expose full-round block decryption` | 완료 | `db3791eccf36e0e6b4dcf78ae1f812ef9444d30c` / 네 KAT 복호화·양방향 in-place·입력/후방 sentinel 보존·오류 출력불변; CTest 11/11; BUILD_TESTING=OFF 제품 빌드·테스트 진입점 부재 확인
+| 14 | `test: add independent reference oracle` | 완료 | 독립 Python 정수·표 S-box oracle 및 고정 JSON 벡터; 네 전체 KAT·1/4/28R KAT·116회 oracle 역변환·SHAKE KAT 일치; GCC14 fresh CTest 12/12
 | 15 | `test: compare all round prefixes` | 대기 | — |
 | 16 | `test: cover buffer and lifetime contracts` | 대기 | — |
 | 17 | `test: add sanitizer and deterministic fuzz checks` | 대기 | — |
@@ -49,4 +49,8 @@ CI 5번 (`526221f`): Linux GCC·Clang, Windows MSVC x64, macOS 모두 성공 확
 
 CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 대기. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42655876272). 최종 13번 SHA와 CI 상태는 인계 응답에서 보고합니다.
 
-요청 종료 범위: 13번. 14~32번은 미구현이며, 독립 oracle·전체 prefix 대조·sanitizer·암호분석·성능·최종 인수 완료로 해석하지 않습니다.
+이전 요청 종료 범위: 13번. 이번 요청에서 14~19번 독립 검증과 구현 안전성 검사를 추가합니다. 암호분석·성능·최종 인수는 20~32번 후속 범위입니다.
+
+13번 최종 CI: Linux GCC/Clang·Windows MSVC x64·macOS 성공 확인. [기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42657019426).
+
+14번 이후 로컬 재개 환경: Linux x86_64, GCC 14.2.0, Python 3.12.14, OpenSSL 3.5.7. 이전 GCC 13.3·OpenSSL 3.0.13 결과와 구분합니다.
