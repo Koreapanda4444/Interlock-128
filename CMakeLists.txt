@@ -3,6 +3,7 @@ project(Interlock128 VERSION 0.1.0 LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(CTest)
 include(CheckCSourceCompiles)
 include(GNUInstallDirs)
@@ -144,4 +145,15 @@ if(BUILD_TESTING)
   add_test(NAME external_consumer COMMAND ${INTERLOCK_CONSUMER_COMMAND})
   set_tests_properties(external_consumer PROPERTIES TIMEOUT 180)
   add_custom_target(check-consumer COMMAND ${INTERLOCK_CONSUMER_COMMAND} DEPENDS interlock VERBATIM)
+  if(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64|amd64)$"
+      AND CMAKE_C_COMPILER_ID MATCHES "^(GNU|Clang)$")
+    find_program(INTERLOCK_OBJDUMP NAMES objdump llvm-objdump REQUIRED)
+    set(INTERLOCK_INVENTORY_COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/audit_inventory.py
+        --source ${CMAKE_CURRENT_SOURCE_DIR} --commands ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json
+        --archive $<TARGET_FILE:interlock> --compiler ${CMAKE_C_COMPILER} --nm ${CMAKE_NM}
+        --objdump ${INTERLOCK_OBJDUMP} --output ${CMAKE_CURRENT_BINARY_DIR}/code-path-inventory.json
+        --disassembly ${CMAKE_CURRENT_BINARY_DIR}/code-path-disassembly.txt)
+    add_test(NAME code_path_inventory COMMAND ${INTERLOCK_INVENTORY_COMMAND})
+    add_custom_target(check-code-paths COMMAND ${INTERLOCK_INVENTORY_COMMAND} DEPENDS interlock VERBATIM)
+  endif()
 endif()

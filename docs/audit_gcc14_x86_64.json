@@ -1,0 +1,358 @@
+{
+  "archive_sha256": "8311376937bc62ba38da4d4ed41bcd727d7251de98e48d520ab07cf507bcdbaf",
+  "compiler": "cc (Debian 14.2.0-19) 14.2.0",
+  "compiler_target": "x86_64-linux-gnu",
+  "functions": [
+    {
+      "conditional_branches": [
+        {
+          "address": "3",
+          "instruction": "jb e <il_range_end+0xe>"
+        }
+      ],
+      "explicit_memory_operand_count": 1,
+      "instructions": 9,
+      "name": "il_range_end",
+      "object": "support.c.o",
+      "relocations": []
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "26",
+          "instruction": "jb 51 <il_ranges_overlap+0x31>"
+        },
+        {
+          "address": "2e",
+          "instruction": "jb 51 <il_ranges_overlap+0x31>"
+        }
+      ],
+      "explicit_memory_operand_count": 0,
+      "instructions": 22,
+      "name": "il_ranges_overlap",
+      "object": "support.c.o",
+      "relocations": []
+    },
+    {
+      "conditional_branches": [],
+      "explicit_memory_operand_count": 0,
+      "instructions": 2,
+      "name": "il_cleanse",
+      "object": "support.c.o",
+      "relocations": [
+        "OPENSSL_cleanse"
+      ]
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "85",
+          "instruction": "je da <il_shake256+0x6a>"
+        },
+        {
+          "address": "8d",
+          "instruction": "je da <il_shake256+0x6a>"
+        },
+        {
+          "address": "98",
+          "instruction": "je e8 <il_shake256+0x78>"
+        },
+        {
+          "address": "9d",
+          "instruction": "je da <il_shake256+0x6a>"
+        },
+        {
+          "address": "a2",
+          "instruction": "je e8 <il_shake256+0x78>"
+        },
+        {
+          "address": "cb",
+          "instruction": "je e8 <il_shake256+0x78>"
+        },
+        {
+          "address": "d1",
+          "instruction": "jne c0 <il_shake256+0x50>"
+        },
+        {
+          "address": "d8",
+          "instruction": "je c0 <il_shake256+0x50>"
+        },
+        {
+          "address": "102",
+          "instruction": "je 1dc <il_shake256+0x16c>"
+        },
+        {
+          "address": "118",
+          "instruction": "je 172 <il_shake256+0x102>"
+        },
+        {
+          "address": "12f",
+          "instruction": "jne 170 <il_shake256+0x100>"
+        },
+        {
+          "address": "134",
+          "instruction": "je 1b0 <il_shake256+0x140>"
+        },
+        {
+          "address": "14b",
+          "instruction": "je 1b0 <il_shake256+0x140>"
+        },
+        {
+          "address": "154",
+          "instruction": "je 140 <il_shake256+0xd0>"
+        },
+        {
+          "address": "164",
+          "instruction": "je 140 <il_shake256+0xd0>"
+        },
+        {
+          "address": "1c1",
+          "instruction": "jne 170 <il_shake256+0x100>"
+        }
+      ],
+      "explicit_memory_operand_count": 10,
+      "instructions": 110,
+      "name": "il_shake256",
+      "object": "support.c.o",
+      "relocations": [
+        ".LC0",
+        "CRYPTO_malloc",
+        "EVP_MD_CTX_new",
+        "EVP_shake256",
+        "EVP_DigestInit_ex",
+        "EVP_DigestUpdate",
+        "EVP_MD_CTX_free",
+        "OPENSSL_cleanse",
+        "CRYPTO_free",
+        "EVP_DigestFinalXOF",
+        "memcpy"
+      ]
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "1d",
+          "instruction": "jne b9 <il_expand_key+0xb9>"
+        },
+        {
+          "address": "26",
+          "instruction": "je b9 <il_expand_key+0xb9>"
+        },
+        {
+          "address": "6e",
+          "instruction": "je 8c <il_expand_key+0x8c>"
+        },
+        {
+          "address": "b5",
+          "instruction": "jne a0 <il_expand_key+0xa0>"
+        }
+      ],
+      "explicit_memory_operand_count": 6,
+      "instructions": 49,
+      "name": "il_expand_key",
+      "object": "interlock_key.c.o",
+      "relocations": [
+        ".rodata",
+        "il_shake256",
+        "il_cleanse"
+      ]
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "d3",
+          "instruction": "je 198 <interlock_key_ctx_create+0xc8>"
+        },
+        {
+          "address": "e3",
+          "instruction": "je 187 <interlock_key_ctx_create+0xb7>"
+        },
+        {
+          "address": "f2",
+          "instruction": "je 100 <interlock_key_ctx_create+0x30>"
+        },
+        {
+          "address": "117",
+          "instruction": "js 187 <interlock_key_ctx_create+0xb7>"
+        },
+        {
+          "address": "11e",
+          "instruction": "jne f4 <interlock_key_ctx_create+0x24>"
+        },
+        {
+          "address": "124",
+          "instruction": "jne 187 <interlock_key_ctx_create+0xb7>"
+        },
+        {
+          "address": "136",
+          "instruction": "je 19e <interlock_key_ctx_create+0xce>"
+        },
+        {
+          "address": "14d",
+          "instruction": "jne 160 <interlock_key_ctx_create+0x90>"
+        },
+        {
+          "address": "178",
+          "instruction": "je 19e <interlock_key_ctx_create+0xce>"
+        },
+        {
+          "address": "181",
+          "instruction": "je f4 <interlock_key_ctx_create+0x24>"
+        }
+      ],
+      "explicit_memory_operand_count": 2,
+      "instructions": 64,
+      "name": "interlock_key_ctx_create",
+      "object": "interlock_key.c.o",
+      "relocations": [
+        "il_ranges_overlap",
+        "malloc",
+        "il_expand_key",
+        "il_cleanse",
+        "free"
+      ]
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "1b3",
+          "instruction": "je 1d0 <interlock_key_ctx_free+0x20>"
+        }
+      ],
+      "explicit_memory_operand_count": 0,
+      "instructions": 11,
+      "name": "interlock_key_ctx_free",
+      "object": "interlock_key.c.o",
+      "relocations": [
+        "il_cleanse",
+        "free"
+      ]
+    },
+    {
+      "conditional_branches": [],
+      "explicit_memory_operand_count": 0,
+      "instructions": 78,
+      "name": "il_substitute",
+      "object": "interlock.c.o",
+      "relocations": []
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "101",
+          "instruction": "jne 3e0 <interlock_encrypt_block+0x300>"
+        },
+        {
+          "address": "10d",
+          "instruction": "je 3e0 <interlock_encrypt_block+0x300>"
+        },
+        {
+          "address": "11c",
+          "instruction": "jne 3d1 <interlock_encrypt_block+0x2f1>"
+        },
+        {
+          "address": "12b",
+          "instruction": "jbe 3d1 <interlock_encrypt_block+0x2f1>"
+        },
+        {
+          "address": "152",
+          "instruction": "js 3e0 <interlock_encrypt_block+0x300>"
+        },
+        {
+          "address": "15b",
+          "instruction": "je 16a <interlock_encrypt_block+0x8a>"
+        },
+        {
+          "address": "164",
+          "instruction": "jne 3d1 <interlock_encrypt_block+0x2f1>"
+        },
+        {
+          "address": "29a",
+          "instruction": "jne 1a0 <interlock_encrypt_block+0xc0>"
+        }
+      ],
+      "explicit_memory_operand_count": 16,
+      "instructions": 238,
+      "name": "interlock_encrypt_block",
+      "object": "interlock.c.o",
+      "relocations": [
+        "il_ranges_overlap",
+        "il_cleanse"
+      ]
+    },
+    {
+      "conditional_branches": [
+        {
+          "address": "426",
+          "instruction": "jne 6f0 <interlock_decrypt_block+0x2f0>"
+        },
+        {
+          "address": "42f",
+          "instruction": "je 6f0 <interlock_decrypt_block+0x2f0>"
+        },
+        {
+          "address": "43e",
+          "instruction": "jne 6dc <interlock_decrypt_block+0x2dc>"
+        },
+        {
+          "address": "44d",
+          "instruction": "jbe 6dc <interlock_decrypt_block+0x2dc>"
+        },
+        {
+          "address": "474",
+          "instruction": "js 6f0 <interlock_decrypt_block+0x2f0>"
+        },
+        {
+          "address": "47d",
+          "instruction": "je 48c <interlock_decrypt_block+0x8c>"
+        },
+        {
+          "address": "486",
+          "instruction": "jne 6dc <interlock_decrypt_block+0x2dc>"
+        },
+        {
+          "address": "5b0",
+          "instruction": "jne 4b0 <interlock_decrypt_block+0xb0>"
+        }
+      ],
+      "explicit_memory_operand_count": 19,
+      "instructions": 235,
+      "name": "interlock_decrypt_block",
+      "object": "interlock.c.o",
+      "relocations": [
+        "il_ranges_overlap",
+        "il_cleanse"
+      ]
+    }
+  ],
+  "instrumented": false,
+  "inventory_script_sha256": "fe88fb099e6b31bf636d1834ab8c807f0003caf6de567f7d7caa353dd2751669",
+  "manual_review": "GCC14.2 x86_64 O3 only; see implementation_audit_ko.md; no constant-time proof",
+  "normalized_disassembly_sha256": "0c69878738be5bb8ec6ba6d84cc14b503aa2fa59a43c49995bf6b73b51e73aa3",
+  "objdump": "GNU objdump (GNU Binutils for Debian) 2.44",
+  "openssl_cleanse_relocation_retained": true,
+  "platform": "Linux x86_64",
+  "private_product_symbols_absent": true,
+  "product_commands": [
+    {
+      "command": "/usr/bin/cc  -I${SOURCE_ROOT}/src -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=c11 -Wall -Wextra -Wpedantic -Wconversion -o CMakeFiles/interlock.dir/src/support.c.o -c ${SOURCE_ROOT}/src/support.c",
+      "file": "${SOURCE_ROOT}/src/support.c"
+    },
+    {
+      "command": "/usr/bin/cc  -I${SOURCE_ROOT}/src -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=c11 -Wall -Wextra -Wpedantic -Wconversion -o CMakeFiles/interlock.dir/src/interlock_key.c.o -c ${SOURCE_ROOT}/src/interlock_key.c",
+      "file": "${SOURCE_ROOT}/src/interlock_key.c"
+    },
+    {
+      "command": "/usr/bin/cc  -I${SOURCE_ROOT}/src -I${SOURCE_ROOT}/include -O3 -DNDEBUG -std=c11 -Wall -Wextra -Wpedantic -Wconversion -o CMakeFiles/interlock.dir/src/interlock.c.o -c ${SOURCE_ROOT}/src/interlock.c",
+      "file": "${SOURCE_ROOT}/src/interlock.c"
+    }
+  ],
+  "scope": "product inventory; manual source/assembly review required; no constant-time proof",
+  "source_sha256": {
+    "include/interlock.h": "8ecc990655407c33655b89fddac0843a3192f2e92fa2d6ae84c33266fe079da8",
+    "src/interlock.c": "615acf0cb2eae93588f2283d51854ed4e0f71b24f26fb39012cbadb741feaeab",
+    "src/interlock_key.c": "79584dbefe0f76f0a7ee05d8b7ab2881826869f6f1a66d1ea9adc8f9e33c1b93",
+    "src/internal.h": "f464d43317dc4f10e0206ca2f32ebd06e740bff35ce02d32729f08bfdf717ae6",
+    "src/support.c": "1647c853d09cd7ca0211fae4431fa3bef75354afe5c91e4ccc2be857bec88c37"
+  }
+}

@@ -8,9 +8,9 @@ cmake --build build --config Release
 ctest --test-dir build -C Release --output-on-failure
 ```
 
-13번 기준 검사는 platform, support, shake, substitution, mixing, forward, reverse, schedule, context, encrypt, decrypt의 11개입니다. `ctest --test-dir build -N`으로 현재 목록을 볼 수 있습니다. 후속 단계에서 실제 추가된 테스트가 같은 CTest 실행에 포함됩니다.
+19번 Linux x86_64 GCC/Clang 기준 검사는 기존 11개와 reference, differential, contracts, concurrency, deterministic_fuzz, external_consumer, code_path_inventory를 합한 18개입니다. macOS·Windows는 ELF x86 inventory를 제외한 17개입니다. `ctest --test-dir build -N`으로 현재 구성의 실제 목록을 볼 수 있습니다.
 
-로컬 실행: Linux x86_64, GCC 13.3.0, CMake 4.4.4, OpenSSL 3.0.13. 위 11개 검사 통과. 현재 작업 환경에 Clang, Windows, macOS가 없어 로컬 실행 완료로 보고하지 않습니다. 원격 결과는 진행표에 해당 SHA와 함께 별도 기록합니다.
+초기 1~13번 로컬 실행은 Linux x86_64 GCC 13.3.0·OpenSSL 3.0.13이었습니다. 14~19번은 새 빌드 디렉터리에서 GCC 14.2.0·OpenSSL 3.5.7·Python 3.12.14·CMake 4.4.4로 실행했습니다. 로컬 Clang·Windows·macOS 실행으로 표기하지 않으며 원격 CI 결과와 구분합니다. sanitizer의 로컬 LSan 제외 조건과 GCC/Clang CI의 실제 누수 검사 성공은 sanitizers_ko.md에 기록했습니다.
 
 CI는 Linux GCC/Clang, macOS 기본 AppleClang, Windows MSVC x64를 구성합니다. Windows는 호스팅 러너의 `VCPKG_INSTALLATION_ROOT`에서 OpenSSL 개발 파일을 설치하고 실제 toolchain을 지정합니다. macOS는 Homebrew의 실제 prefix를 탐지합니다. 외부 의존성 설치·러너 가용성 장애와 코드 실패를 구분합니다.
 

@@ -25,8 +25,8 @@
 | 15 | `test: compare all round prefixes` | 완료 | `93062851f36d15fe01b9f91b9111266e5e8712b9` / 연구 옵션 OFF에서 1,024개 전체일정·29,696개 정방향/29,696개 역방향 prefix·공개 API2,048개 일치; 기존 CTest12/12+check-differential 통과
 | 16 | `test: cover buffer and lifetime contracts` | 완료 | `774a82cf24ab9b6e21958fb957e0bba26558cf58` / 길이6×용량4 조합·±32오프셋·슬롯/키 부분겹침·6개 실패주입·해제 전 소거 확인; 제품 컨텍스트 4스레드×4096회 왕복; CTest15/15
 | 17 | `test: add sanitizer and deterministic fuzz checks` | 완료 | `26b01c9357af1ac50d2feef6cf66dff556957821` / 고정seed16,384조합; Release16/16·로컬 GCC ASan/UBSan16/16 진단0; 로컬 LSan은 ptrace 차단으로 미검증, CI GCC/Clang 누수검사 ON
-| 18 | `test: verify external c consumer builds` | 완료 | 공개 CMake 패키지 설치·prefix 이동·독립 C 소비자 및 nm 심볼격리; Release/로컬 ASan·UBSan CTest17/17·제품단독 소비자 통과; CI17 GCC/Clang LSan까지 성공
-| 19 | `test: audit secret-dependent code paths` | 대기 | — |
+| 18 | `test: verify external c consumer builds` | 완료 | `eeaea3492effcf65549059861d49bb714c376eca` / 공개 CMake 패키지 설치·prefix 이동·독립 C 소비자 및 nm 심볼격리; Release/로컬 ASan·UBSan CTest17/17·제품단독 소비자 통과; CI17 GCC/Clang LSan까지 성공
+| 19 | `test: audit secret-dependent code paths` | 완료 | 소스 비밀흐름·GCC14 x86_64 O3 제품10함수 수동 검토·재현 inventory/해시/소거보존; spill 한계 명시; Release/로컬 ASan·UBSan CTest18/18
 | 20 | `feat: add reproducible research harness` | 대기 | — |
 | 21 | `test: reproduce outer subkey recovery` | 대기 | — |
 | 22 | `test: reproduce reduced-round differential constraints` | 대기 | — |
@@ -56,3 +56,7 @@ CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 
 14번 이후 로컬 재개 환경: Linux x86_64, GCC 14.2.0, Python 3.12.14, OpenSSL 3.5.7. 이전 GCC 13.3·OpenSSL 3.0.13 결과와 구분합니다.
 
 17번 CI (`26b01c9`): Linux GCC·Clang의 Release 및 Debug ASan·UBSan·LSan(detect_leaks=1) 단계 모두 성공. macOS Release 성공, Windows 실행 중. [실행](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42733975841). 로컬 LSan 차단과 구분합니다.
+
+19번 요청 종료 범위: 1~19번 구현·검증·원격 반영. 20~32번 연구/성능/최종 인수는 대기이며 시작하지 않습니다. 마지막 19번 자신의 SHA와 최종 CI 결과는 인계 응답에서 기록합니다.
+
+19번 로컬 최종: Release CTest18/18, ASan·UBSan CTest18/18 통과(로컬 detect_leaks=0, LSan ptrace 제약). 대표 GCC14 산출물 10개 함수 검토; S-box 조건분기/명시 데이터 주소 없음, 컴파일러 spill 잔여 사본 한계를 기록했습니다. CI 누수 검사는 계속 detect_leaks=1입니다.

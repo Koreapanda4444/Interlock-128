@@ -10,7 +10,7 @@
 
 배포 라이선스는 소유자가 아직 선택하지 않았습니다. 공개 배포 전 확인해야 합니다. OpenSSL 등 의존성의 라이선스는 별도로 적용됩니다.
 
-현재 요청 범위인 **1~13번**은 생성·해제와 전체 28라운드 암호화·복호화 API, 네 고정 벡터 및 버퍼 계약 검사를 포함합니다. 14~32번의 독립 oracle·전체 prefix 대조·sanitizer·암호분석·성능 평가는 아직 완료하지 않았습니다.
+현재 **1~19번**까지 구현했습니다. 전체 28라운드 API, 독립 Python oracle, 1,024개 전체 prefix 대조, 계약·동시성·고정 seed 검사, sanitizer CI, 설치 패키지의 독립 C 소비자와 구현 경로 검토를 포함합니다. [검증 기록](docs/validation_ko.md), [sanitizer 결과](docs/sanitizers_ko.md), [소스·기계어 검토 범위](docs/implementation_audit_ko.md)를 구분해 확인할 수 있습니다. 20~32번의 암호분석·성능 평가·최종 인수는 후속 범위입니다.
 
 ```c
 #include <interlock.h>
