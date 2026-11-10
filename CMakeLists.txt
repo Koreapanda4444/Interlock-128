@@ -5,6 +5,8 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 include(CTest)
 include(CheckCSourceCompiles)
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 find_package(OpenSSL 3.0 REQUIRED COMPONENTS Crypto)
 check_c_source_compiles("#include <limits.h>\n#include <stdint.h>\n_Static_assert(CHAR_BIT == 8, \"8-bit bytes required\");\n_Static_assert(sizeof(uint32_t) == 4 && sizeof(uint64_t) == 8, \"fixed widths required\");\n#ifndef UINTPTR_MAX\n#error uintptr_t required\n#endif\nint main(void) { return 0; }" INTERLOCK_SUPPORTED_INTEGERS)
 if(NOT INTERLOCK_SUPPORTED_INTEGERS)
@@ -25,7 +27,9 @@ if(CRYPTO_ENABLE_SANITIZERS)
 endif()
 add_library(interlock STATIC src/support.c src/interlock_key.c src/interlock.c)
 target_include_directories(interlock PRIVATE src)
-target_include_directories(interlock PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+target_include_directories(interlock PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 target_link_libraries(interlock PRIVATE OpenSSL::Crypto)
 if(CRYPTO_ENABLE_SANITIZERS)
   target_link_options(interlock INTERFACE -fsanitize=address,undefined -fno-sanitize-recover=all)
@@ -35,6 +39,18 @@ if(MSVC)
 else()
   target_compile_options(interlock PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
 endif()
+install(TARGETS interlock EXPORT Interlock128Targets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(FILES include/interlock.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT Interlock128Targets FILE Interlock128Targets.cmake NAMESPACE Interlock128::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Interlock128)
+configure_package_config_file(cmake/Interlock128Config.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/Interlock128Config.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Interlock128)
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/Interlock128ConfigVersion.cmake
+    VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Interlock128Config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/Interlock128ConfigVersion.cmake
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/Interlock128)
 if(BUILD_TESTING)
   find_package(Threads REQUIRED)
   add_library(interlock_testcore STATIC src/interlock.c)
@@ -122,4 +138,10 @@ if(BUILD_TESTING)
   target_link_libraries(test_fuzz PRIVATE interlock)
   add_test(NAME deterministic_fuzz COMMAND test_fuzz)
   set_tests_properties(deterministic_fuzz PROPERTIES TIMEOUT 120)
+  set(INTERLOCK_CONSUMER_COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/check_consumer.py
+      --cmake ${CMAKE_COMMAND} --parent-build ${CMAKE_CURRENT_BINARY_DIR}
+      --work ${CMAKE_CURRENT_BINARY_DIR}/consumer-check --config=$<CONFIG>)
+  add_test(NAME external_consumer COMMAND ${INTERLOCK_CONSUMER_COMMAND})
+  set_tests_properties(external_consumer PROPERTIES TIMEOUT 180)
+  add_custom_target(check-consumer COMMAND ${INTERLOCK_CONSUMER_COMMAND} DEPENDS interlock VERBATIM)
 endif()

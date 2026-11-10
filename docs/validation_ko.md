@@ -19,3 +19,7 @@ cmake --build build --config Release --target check-differential
 할당·EVP 실패 주입은 별도 `INTERLOCK_TESTING` 라이브러리에서만 수행합니다. 소거 관찰기는 아직 유효한 메모리를 `OPENSSL_cleanse` 직후, 해제 전에 확인합니다. 해제 후 읽기·이중 해제·미초기화 포인터 검사는 사용하지 않습니다. 이 관찰기는 제품 라이브러리에 포함되지 않으며 동시성 검사는 관찰기가 없는 제품 라이브러리만 링크합니다.
 
 15번 로컬 결과: 일정 1,024개, 정방향 prefix 29,696개, 역변환 prefix 29,696개, 공개 API 2,048개 대조 모두 일치. 생성한 1,024개 `key || block` 연결의 SHA-256은 `5b8df36607cb0d0810d47f345bc47f92500a95dcd12c7cf1ab08182449e9bdd4`입니다. Linux GCC 14.2·Python 3.12.14에서 약 9.53초였으며 성능 벤치마크 수치로 쓰지 않습니다.
+
+18번은 설치 후 prefix를 다른 위치로 옮긴 다음, `tests/consumer` 두 파일만 복사한 별도 CMake 프로젝트에서 `find_package(Interlock128 CONFIG)`와 `Interlock128::interlock`만 사용합니다. 공개 헤더로 생성→암호화→복호화→해제를 수행하고 고정 벡터를 확인합니다. 설치된 archive를 nm/dumpbin으로 검사해 테스트·prefix 진입점이 없고 네 공개 심볼이 존재하는지 확인합니다. 내부 헤더와 드라이버는 설치하지 않습니다.
+
+Release·ASan/UBSan 빌드에서 consumer 포함 CTest 17/17을 통과했고, BUILD_TESTING=OFF 별도 제품 빌드에서도 설치·이동·별도 consumer 실행을 통과했습니다. 로컬 LSan 제외 조건은 sanitizer 문서와 같습니다. `check-consumer` target은 같은 재현 검사를 제공합니다.

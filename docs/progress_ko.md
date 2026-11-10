@@ -24,8 +24,8 @@
 | 14 | `test: add independent reference oracle` | 완료 | `8ba87deecba68b5d7099187d8da72ff3faac0506` / 독립 Python 정수·표 S-box oracle 및 고정 JSON 벡터; 네 전체 KAT·1/4/28R KAT·116회 oracle 역변환·SHAKE KAT 일치; GCC14 fresh CTest 12/12
 | 15 | `test: compare all round prefixes` | 완료 | `93062851f36d15fe01b9f91b9111266e5e8712b9` / 연구 옵션 OFF에서 1,024개 전체일정·29,696개 정방향/29,696개 역방향 prefix·공개 API2,048개 일치; 기존 CTest12/12+check-differential 통과
 | 16 | `test: cover buffer and lifetime contracts` | 완료 | `774a82cf24ab9b6e21958fb957e0bba26558cf58` / 길이6×용량4 조합·±32오프셋·슬롯/키 부분겹침·6개 실패주입·해제 전 소거 확인; 제품 컨텍스트 4스레드×4096회 왕복; CTest15/15
-| 17 | `test: add sanitizer and deterministic fuzz checks` | 완료 | 고정seed16,384조합; Release16/16·로컬 GCC ASan/UBSan16/16 진단0; 로컬 LSan은 ptrace 차단으로 미검증, CI GCC/Clang 누수검사 ON
-| 18 | `test: verify external c consumer builds` | 대기 | — |
+| 17 | `test: add sanitizer and deterministic fuzz checks` | 완료 | `26b01c9357af1ac50d2feef6cf66dff556957821` / 고정seed16,384조합; Release16/16·로컬 GCC ASan/UBSan16/16 진단0; 로컬 LSan은 ptrace 차단으로 미검증, CI GCC/Clang 누수검사 ON
+| 18 | `test: verify external c consumer builds` | 완료 | 공개 CMake 패키지 설치·prefix 이동·독립 C 소비자 및 nm 심볼격리; Release/로컬 ASan·UBSan CTest17/17·제품단독 소비자 통과; CI17 GCC/Clang LSan까지 성공
 | 19 | `test: audit secret-dependent code paths` | 대기 | — |
 | 20 | `feat: add reproducible research harness` | 대기 | — |
 | 21 | `test: reproduce outer subkey recovery` | 대기 | — |
@@ -54,3 +54,5 @@ CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 
 13번 최종 CI: Linux GCC/Clang·Windows MSVC x64·macOS 성공 확인. [기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42657019426).
 
 14번 이후 로컬 재개 환경: Linux x86_64, GCC 14.2.0, Python 3.12.14, OpenSSL 3.5.7. 이전 GCC 13.3·OpenSSL 3.0.13 결과와 구분합니다.
+
+17번 CI (`26b01c9`): Linux GCC·Clang의 Release 및 Debug ASan·UBSan·LSan(detect_leaks=1) 단계 모두 성공. macOS Release 성공, Windows 실행 중. [실행](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42733975841). 로컬 LSan 차단과 구분합니다.

@@ -17,3 +17,5 @@ ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_
 17번 로컬 결과: Linux x86_64 GCC 14.2, OpenSSL 3.5.7에서 Release 16/16 및 Debug ASan·UBSan 16/16 통과. Debug는 `ASAN_OPTIONS=detect_leaks=0:halt_on_error=1`로 실행했으며 주소·UB 진단 0건입니다.
 
 누수 검사는 로컬에서 차단됐습니다. 암호 코어를 호출하지 않는 `test_platform`부터 `detect_leaks=1`에서 `LeakSanitizer does not work under ptrace` 진단과 실패 종료가 발생했습니다. 이 결과를 누수 통과로 처리하지 않습니다. 로컬에 Clang은 없으며 GCC/Clang CI의 `detect_leaks=1` 결과는 원격 실행 후 진행표에 별도 기록합니다.
+
+17번 원격 실행에서 Linux GCC·Clang의 ASan·UBSan·누수 검사를 모두 통과했습니다. [CI 단계별 결과](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42733975841). 실행 시 ASAN_OPTIONS의 detect_leaks는 1이며 로컬 ptrace 환경의 제외 설정을 적용하지 않았습니다.
