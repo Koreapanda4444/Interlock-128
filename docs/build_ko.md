@@ -1,30 +1,44 @@
-# 빌드와 검증 환경
+# 빌드와 전체 재현
 
-CMake 3.20 이상, C11 컴파일러, OpenSSL 3.x 개발 파일이 필요합니다.
+CMake 3.20+, 8비트 바이트·uint32_t/uint64_t/uintptr_t를 지원하는 C11 compiler, OpenSSL 3.x libcrypto 개발 파일이 필요합니다. 테스트·연구·벤치 중 하나라도 켜면 Python 3.11+도 필요합니다. OpenSSL 내부 타입은 공개 헤더에 없습니다.
 
 ```sh
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON -DCRYPTO_BUILD_RESEARCH=ON -DCRYPTO_BUILD_BENCHMARKS=ON
 cmake --build build --config Release
 ctest --test-dir build -C Release --output-on-failure
+cmake --build build --config Release --target check-differential
+cmake --build build --config Release --target research-smoke
+cmake --build build --config Release --target research-full
+cmake --build build --config Release --target bench
 ```
 
-19번 Linux x86_64 GCC/Clang 기준 검사는 기존 11개와 reference, differential, contracts, concurrency, deterministic_fuzz, external_consumer, code_path_inventory를 합한 18개입니다. macOS·Windows는 ELF x86 inventory를 제외한 17개입니다. `ctest --test-dir build -N`으로 현재 구성의 실제 목록을 볼 수 있습니다.
+Linux x86_64 GCC/Clang의 전체 구성은23개 CTest입니다. ELF inventory가 없는 Windows/macOS는22개입니다. `ctest --test-dir build -N`으로 실제 목록을 확인합니다. `research-full`은1,200초 고정 예산, smoke는120초입니다. 상태가 incomplete/failed면 완료로 취급하지 않습니다. 연구 원시 계수와 성능 결과는 build 아래에 생성합니다.
 
-초기 1~13번 로컬 실행은 Linux x86_64 GCC 13.3.0·OpenSSL 3.0.13이었습니다. 14~19번은 새 빌드 디렉터리에서 GCC 14.2.0·OpenSSL 3.5.7·Python 3.12.14·CMake 4.4.4로 실행했습니다. 로컬 Clang·Windows·macOS 실행으로 표기하지 않으며 원격 CI 결과와 구분합니다. sanitizer의 로컬 LSan 제외 조건과 GCC/Clang CI의 실제 누수 검사 성공은 sanitizers_ko.md에 기록했습니다.
+옵션 기본값은 `BUILD_TESTING=ON`, `CRYPTO_BUILD_RESEARCH=OFF`, `CRYPTO_BUILD_BENCHMARKS=OFF`, `CRYPTO_ENABLE_SANITIZERS=OFF`입니다. prefix 검증은 테스트 옵션만 켜도 가능하고 제품에는 포함되지 않습니다. 연구·벤치 옵션은 테스트를 끈 구성에서도 각각 독립적으로 빌드합니다.
 
-CI는 Linux GCC/Clang, macOS 기본 AppleClang, Windows MSVC x64를 구성합니다. Windows는 호스팅 러너의 `VCPKG_INSTALLATION_ROOT`에서 OpenSSL 개발 파일을 설치하고 실제 toolchain을 지정합니다. macOS는 Homebrew의 실제 prefix를 탐지합니다. 외부 의존성 설치·러너 가용성 장애와 코드 실패를 구분합니다.
-
-러너 환경 참고: [공식 Windows 이미지 목록](https://github.com/actions/runner-images/blob/main/images/windows/Windows2025-Readme.md), [checkout v6 설명](https://github.com/actions/checkout/tree/v6). 러너 이미지의 변동에 따라 실제 실행 버전은 CI 로그에서 확인합니다.
-
-공개 CMake 패키지 설치와 소비자 빌드:
+제품만 빌드·설치하고 외부 C 소비자를 실행하는 예:
 
 ```sh
-cmake --install build --config Release --prefix /absolute/interlock-prefix
+cmake -S . -B build-product -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=OFF -DCRYPTO_BUILD_RESEARCH=OFF -DCRYPTO_BUILD_BENCHMARKS=OFF
+cmake --build build-product --config Release
+cmake --install build-product --config Release --prefix /absolute/interlock-prefix
 cmake -S tests/consumer -B build-consumer -DCMAKE_PREFIX_PATH=/absolute/interlock-prefix
 cmake --build build-consumer --config Release
 ctest --test-dir build-consumer -C Release --output-on-failure
 ```
 
-위 prefix는 실제 설치 경로로 바꿉니다. Windows에서는 본체와 같은 OpenSSL/vcpkg toolchain·triplet을 소비자 configure에도 지정합니다. 자동 `external_consumer` 검사는 본체 configure 값을 전달합니다. OpenSSL은 별도 의존성이며 패키지가 자체 복제·배포하지 않습니다.
+실제 prefix로 바꾸며 OpenSSL은 별도 의존성입니다. 테스트의 `external_consumer`는 설치→prefix 이동→공개 CMake 패키지만 사용하는 소비자 빌드와 nm/dumpbin 심볼 격리를 확인합니다. 내부 헤더·prefix/vector driver를 설치하지 않습니다.
 
-20~26번 연구 옵션을 켠 Linux x86_64 구성은 총22개 CTest 검사, macOS·Windows는 ELF inventory를 제외한21개입니다. 옵션을 끈 기존 구성의 검사는 유지됩니다. 연구 실행은 `docs/research_ko.md`를 참고합니다. 이번 로컬 Release와 Debug ASan·UBSan은 각각22/22 통과했습니다. 로컬 LSan은 ptrace 차단을 다시 확인했으며 제외 상태와 CI 누수 검사를 구분합니다. 제품 전용 BUILD_TESTING=OFF·CRYPTO_BUILD_RESEARCH=OFF에서도 설치·재배치·외부 소비자·제품 심볼 격리 검사가 통과했습니다.
+Linux GCC/Clang ASan·UBSan:
+
+```sh
+cmake -S . -B build-sanitize -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DCRYPTO_BUILD_RESEARCH=ON -DCRYPTO_ENABLE_SANITIZERS=ON
+cmake --build build-sanitize --config Debug
+ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 ctest --test-dir build-sanitize --output-on-failure
+```
+
+로컬 실행의 LSan은 ptrace에서 중단되어 `detect_leaks=0`의 ASan·UBSan 결과와 분리합니다. CI의 Linux GCC/Clang은 `detect_leaks=1`입니다. 상세 범위는 [sanitizers_ko.md](sanitizers_ko.md)에 있습니다. sanitizer 구성을 성능 비교에 사용하지 않습니다.
+
+Windows MSVC x64에서는 실제 OpenSSL/vcpkg toolchain·triplet을 configure에 전달하고 `Release/`의 실행파일과 `--config Release`를 사용합니다. macOS는 Homebrew 등의 실제 prefix를 지정합니다. CI는 이를 탐지해 Ubuntu GCC/Clang·macOS AppleClang·Windows MSVC를 빌드합니다. 의존성 설치·runner 대기와 코드 실패를 구분하며 미실행 환경을 성공으로 간주하지 않습니다.
+
+과거 로컬 결과:1~13번은 GCC13.3/OpenSSL3.0.13,14번 이후는 GCC14.2/OpenSSL3.5.7/Python3.12입니다. 현재 실측 환경은 결과 JSON과 해당 SHA의 CI 로그를 참조합니다.

@@ -37,8 +37,8 @@
 | 27 | `feat: measure setup and block processing costs` | 완료 | `7365bebc249917946812fff176eedea2435c04dc` / native C 공개API11항목·최소5표본·KAT/전체길이왕복·checksum/환경/원시시간; Release23/23·샘플수 오류거부; 실제 비용경계 분리
 | 28 | `feat: add aes reference measurements` | 완료 | `8119660bcd633e4f92a8a78e5bfd04f04facd85e` / AES33항목×5표본·FIPS197 정역KAT·기본/CPUcap0:0 실측; Release23/23; 추가 타이머수정/오류진단·100µs clock 회귀 통과
 | 29 | `test: evaluate bit-compatible scalar optimizations` | 완료 | `03326f824f10345b328ccff29c814e09e46e4cb6` / 실제 ANF 공통항 변형 생성·원본/후보 Release23/23 및 full6단계 동일; 순서교대3쌍×5표본·기계어차이 확인; 개선 불일관으로 제품코어 유지
-| 30 | `docs: report reproducible performance results` | 완료 | 최종실측33항목×5표본 재실행·기본/CPUcap제한·키생성/해제/새키/16B~1MiB 표·환경/측정경계/과거14.97 분리; 실험archive Python3.11 호환/API·경로탈출 검사
-| 31 | `docs: finalize implementation and research handoff` | 대기 | — |
+| 30 | `docs: report reproducible performance results` | 완료 | `a6c2d383dd3488875c5ad2949bc8f6032c079af0` / 최종실측33항목×5표본 재실행·기본/CPUcap제한·키생성/해제/새키/16B~1MiB 표·환경/측정경계/과거14.97 분리; 실험archive Python3.11 호환/API·경로탈출 검사
+| 31 | `docs: finalize implementation and research handoff` | 완료 | README/API/빌드/연구/보안/성능/인계 문서 정합·모든상대링크 확인; 숨은ZIP/옛대화 불필요·실험범위/미검증/라이선스 미정 명시; 32번 인수 예정
 | 32 | `test: verify clean-checkout acceptance` | 대기 | — |
 
 CI 5번 (`526221f`): Linux GCC/Clang 성공; Windows는 OpenSSL 설치 중, macOS는 러너 대기. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42648381420).
@@ -70,3 +70,5 @@ CI 이력: 20번 macOS 작업은 cancelled(실행 단계 없음), 나머지3개 
 추가 수정 `fix: handle sub-resolution benchmark warmups`: 28번 macOS의 benchmark_smoke가 native exit1로 실패했고 나머지21검사는 성공했습니다. 기존 Python wrapper가 stderr를 숨겨 원인 메시지는 로그에 없었습니다. 오류를 그대로 전달하도록 고치고, 단일 untimed warmup/calibration의0시간은 허용하되 정식 표본은 반복을 늘려 반드시 양수 시간을 확보합니다. 실제 macOS 재검증 결과는 후속 기록/인계에서 보고합니다. Linux 두 compiler의28번 검사는 성공했습니다.
 
 타이머 수정 로컬 검증: 100µs 단위로 시간을 양자화한 실제 clock shim에서 수정 전 실행파일은 nonpositive measurement interval로 실패하고 수정 후는33행×5표본 모두 양수 시간으로 완료했습니다. 일반 benchmark_smoke도 성공했습니다. 이 재현은 macOS 원인 단정이 아니라 동일한 짧은 시간 구간 실패 경로의 회귀 검사입니다.
+
+추가 수정 SHA: `13e20c4748de9e9d2a5a15fb8a7c47ab128f209f` (`fix: handle sub-resolution benchmark warmups`). 계획32개와 별도로 필요한 타이머 회귀 수정1개입니다. 26번 최종 CI는 Linux GCC/Clang·Windows·macOS 모두 성공했습니다. [26번 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43897959537). 이후 상태는 최신 SHA의 CI로 별도 보고합니다.
