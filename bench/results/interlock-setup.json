@@ -1,0 +1,446 @@
+{
+  "boundaries": {
+    "excluded": "data generation, buffer allocation, correctness checks, checksum and JSON printing; no LTO requested",
+    "fresh_key_encrypt_free": "create + one public 16-byte encryption + cleanse/free; no input generation",
+    "interpretation": "independent block API calls; no cipher mode or security equivalence claim",
+    "key_create": "callback/public API + allocation + SHAKE256 + 448-byte schedule; pointer-array allocation and later free excluded",
+    "key_free": "callback/public API + schedule cleanse + free; preparation and pointer-array free excluded",
+    "ready": "prepared key reused; callback + loop + public argument checks + full 28 rounds + public cleanup; no key creation",
+    "samples": "three untimed warmup iterations and untimed doubling calibration; at least five timed samples; target is a calibration goal, not a guaranteed minimum"
+  },
+  "checksum": "fc1b7d395ba848ad",
+  "correctness": "KAT and all-size roundtrips",
+  "cpu_settings": "CPUINFO: OPENSSL_ia32cap=0xfffa32035f8bffff:0x00415f46f1bf2fbb:0x0000000020000010:0x0000000000000000:0x0000000000000000",
+  "environment": {
+    "affinity_and_frequency": "not pinned or controlled; shared host; no cycle-count claim",
+    "architecture": "x86_64",
+    "cache": {
+      "CMAKE_C_FLAGS": "",
+      "CMAKE_C_FLAGS_DEBUG": "-g",
+      "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_GENERATOR": "Unix Makefiles",
+      "CRYPTO_ENABLE_SANITIZERS": "OFF"
+    },
+    "compiler": "GNU 14.2.0",
+    "configuration": "Release",
+    "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+    "logical_cpus": 9,
+    "openssl_ia32cap_override": null,
+    "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+  "provenance": {
+    "command": [
+      "interlock_bench",
+      "--samples",
+      "5",
+      "--target-ms",
+      "40"
+    ],
+    "driver_sha256": "c9697a73f1fcfff79ab53c1edf4a76c3e4fc14e9ec75b892bc126121624bccf7",
+    "git_head": "e7a8659f856524d36a7a23f8394777429bf73ebb",
+    "source_sha256": {
+      "CMakeLists.txt": "6d638ef80b568cbb33dbb554d124d46bf7cb270e4c9edf0b3e3b5ea820625507",
+      "bench/backend.h": "ead232dca42f85340782ba861988ea8a774e1185c468daa6bf912073b8fa3d01",
+      "bench/interlock_backend.c": "acde8e0a64fa59b00390e6488591dc70ec59928a2d5d2e06e763cb2def50dbc5",
+      "bench/native.c": "fd2163f8c54d90abc85e4753ab8c0702b6d1fe2f8bdf96f7957354bb217b1f3c",
+      "bench/run.py": "dc07da24b7ad128686d9b0ec0da28a4d29387056c245538129772ef20e68d44d",
+      "cmake/Bench.cmake": "fa67218cfd7593cf099e40e95805b2948cff3dd753f6bdfa6cd2f41f5c63239e",
+      "include/interlock.h": "8ecc990655407c33655b89fddac0843a3192f2e92fa2d6ae84c33266fe079da8",
+      "src/interlock.c": "615acf0cb2eae93588f2283d51854ed4e0f71b24f26fb39012cbadb741feaeab",
+      "src/interlock_key.c": "79584dbefe0f76f0a7ee05d8b7ab2881826869f6f1a66d1ea9adc8f9e33c1b93",
+      "src/internal.h": "f464d43317dc4f10e0206ca2f32ebd06e740bff35ce02d32729f08bfdf717ae6",
+      "src/support.c": "1647c853d09cd7ca0211fae4431fa3bef75354afe5c91e4ccc2be857bec88c37"
+    }
+  },
+  "rows": [
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 0,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "ns_per_iteration": {
+        "max": 3648.553955078125,
+        "median": 2815.7359619140625,
+        "min": 2541.0426025390625
+      },
+      "operation": "key_create",
+      "samples": [
+        {
+          "elapsed_seconds": 0.020816221,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.023066509,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.024426014,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.021068089,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.029888954,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 0,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "ns_per_iteration": {
+        "max": 440.8759765625,
+        "median": 107.779052734375,
+        "min": 69.9837646484375
+      },
+      "operation": "key_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.003611656,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000882926,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000573307,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001056052,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000625568,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 3.7452456353806225,
+      "ns_per_iteration": {
+        "max": 6333.43359375,
+        "median": 4074.17578125,
+        "min": 3562.14501953125
+      },
+      "operation": "fresh_key_encrypt_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.008194924,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.008343912,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.008356972,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.012970872,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.007295273,
+          "iterations": 2048
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 8.709593885920834,
+      "ns_per_iteration": {
+        "max": 2424.3880310058594,
+        "median": 1751.9518432617188,
+        "min": 1515.37890625
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.049655936,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.053350999,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.058409951,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.079442347,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.057407958,
+          "iterations": 32768
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 6.929574347846671,
+      "ns_per_iteration": {
+        "max": 5825.312683105469,
+        "median": 2201.980712890625,
+        "min": 1288.8831176757812
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.045804299,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.02926955,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.036077252,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.021117061,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.095441923,
+          "iterations": 16384
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1024,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 10.59379491769045,
+      "ns_per_iteration": {
+        "max": 93862.73046875,
+        "median": 92182.5,
+        "min": 88303.93359375
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.024028859,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.02359872,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.022605807,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.023126917,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.023923486,
+          "iterations": 256
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1024,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 6.041224129378953,
+      "ns_per_iteration": {
+        "max": 223119.091796875,
+        "median": 161649.771484375,
+        "min": 108616.951171875
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.108213053,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.082764683,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.055611879,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.114236975,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.059323506,
+          "iterations": 512
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16384,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 11.205491228565576,
+      "ns_per_iteration": {
+        "max": 1550372.84375,
+        "median": 1394405.625,
+        "min": 1373865.03125
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.043963681,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.047837712,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.04417071,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.049611931,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.04462098,
+          "iterations": 32
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16384,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 10.600931618351366,
+      "ns_per_iteration": {
+        "max": 1545100.65625,
+        "median": 1473927.0625,
+        "min": 1265513.34375
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.040496427,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.047860086,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.042113666,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.049443221,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.047165666,
+          "iterations": 32
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1048576,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 10.644136634226284,
+      "ns_per_iteration": {
+        "max": 101588617.0,
+        "median": 93948437.0,
+        "min": 89431383.0
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.096711821,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.089431383,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.093948437,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.093212642,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.101588617,
+          "iterations": 1
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1048576,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 11.734425129280801,
+      "ns_per_iteration": {
+        "max": 89412313.0,
+        "median": 85219343.0,
+        "min": 81069219.0
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.085219343,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.081069219,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.084459681,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.087662061,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.089412313,
+          "iterations": 1
+        }
+      ],
+      "warmup_iterations": 3
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete",
+  "target_seconds": 0.04,
+  "timer": "clock_gettime(CLOCK_MONOTONIC)"
+}

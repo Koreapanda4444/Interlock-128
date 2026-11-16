@@ -1,6 +1,6 @@
 # 구현 진행표
 
-이번 요청 범위는 **20~26번**이며, 1~19번에 이어 진행합니다. 27~32번은 후속 작업입니다.
+이번 요청 범위는 **27~32번**이며, 1~26번에 이어 진행합니다. 푸시 후 인위적인 대기 없이 진행합니다.
 
 대상: `Koreapanda4444/Interlock-128`, `main`. 원격 비어 있음과 push 권한 확인. 이전 코어 미승계.
 
@@ -33,8 +33,8 @@
 | 23 | `feat: calculate exact component properties` | 완료 | `baa538a5df6ae6f4edfb092ea8eb18c1b1025e5f` / DDT/LAT/ANF 전수·행합/Parseval/진리표 재구성; 4/16·Walsh8/16·차수2,3,3,3·L32 rank32 및 기존 역행렬 항등 확인, smoke/연구검사 통과
 | 24 | `feat: screen registered differential masks` | 완료 | `d9ba986c02fb541ddf40f742b4a960b8d9b62d31` / 사전등록 4/8/16/28R×입력128×1024쌍=524288쌍, 출력128계수·65536비교; 라운드별후보와동률규칙을 원시행렬로 재검산·반복결과일치, smoke/연구검사 통과
 | 25 | `test: validate findings on independent holdouts` | 완료 | `340d3bbbb4eb347dc0897844bc1ab10c7f3e2861` / 고정후보4개×다른키4개×32768쌍=524288쌍 full 완료·16개 Wilson95 구간/합산비율 분리; 캐시/재선택 방지·구간경계/NIST검사 및 연구 smoke 통과
-| 26 | `docs: record attack scope and unresolved questions` | 완료 | 成功한1R/2R/3R 공격·부품 exact·전체 discovery/holdout·한계/미탐색 문서화; full6단계 complete41.06초/1200초·Release/로컬 ASanUBSan22/22·제품소비자 통과, 코어/KAT 불변
-| 27 | `feat: measure setup and block processing costs` | 대기 | — |
+| 26 | `docs: record attack scope and unresolved questions` | 완료 | `e7a8659f856524d36a7a23f8394777429bf73ebb` / 성공한1R/2R/3R 공격·부품 exact·전체 discovery/holdout·한계/미탐색 문서화; full6단계 complete41.06초/1200초·Release/로컬 ASanUBSan22/22·제품소비자 통과, 코어/KAT 불변
+| 27 | `feat: measure setup and block processing costs` | 완료 | native C 공개API11항목·최소5표본·KAT/전체길이왕복·checksum/환경/원시시간; Release23/23·샘플수 오류거부; 실제 비용경계 분리
 | 28 | `feat: add aes reference measurements` | 대기 | — |
 | 29 | `test: evaluate bit-compatible scalar optimizations` | 대기 | — |
 | 30 | `docs: report reproducible performance results` | 대기 | — |
