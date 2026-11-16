@@ -29,8 +29,8 @@
 | 19 | `test: audit secret-dependent code paths` | 완료 | `2f113ac0404ef1752ea44910a5fe03c9d9243821` / 소스 비밀흐름·GCC14 x86_64 O3 제품10함수 수동 검토·재현 inventory/해시/소거보존; spill 한계 명시; Release/로컬 ASan·UBSan CTest18/18
 | 20 | `feat: add reproducible research harness` | 완료 | `b718dcbea78a567e65fc2219e7de80c087f5dc4d` / 연구/제품 target 분리·정확 seed 프레이밍·코드/실행파일 해시·완료/실패/timeout JSON; 기존18검사+연구2검사 통과, smoke/full 및 BUILD_TESTING=OFF 연구 빌드 검증
 | 21 | `test: reproduce outer subkey recovery` | 완료 | `4b21e8b93adde16732ca60fce536569f392d55af` / GF(2) L32 역행렬·32기저 양방향 항등·역 S 검증; 1R k0/k3 64비트 복구 full1024키×2쌍·다른 평문 FS 관계 모두 일치, smoke/연구검사 통과
-| 22 | `test: reproduce reduced-round differential constraints` | 완료 | 2R 네값·3R 지원상계/10개 강제0비트 정확계산; full128키×128쌍 각16384쌍 C 검증 반례0·smoke/연구검사 통과
-| 23 | `feat: calculate exact component properties` | 대기 | — |
+| 22 | `test: reproduce reduced-round differential constraints` | 완료 | `2511749fb0ccf1d9a2e09e9d477519623b3f9385` / 2R 네값·3R 지원상계/10개 강제0비트 정확계산; full128키×128쌍 각16384쌍 C 검증 반례0·smoke/연구검사 통과
+| 23 | `feat: calculate exact component properties` | 완료 | DDT/LAT/ANF 전수·행합/Parseval/진리표 재구성; 4/16·Walsh8/16·차수2,3,3,3·L32 rank32 및 기존 역행렬 항등 확인, smoke/연구검사 통과
 | 24 | `feat: screen registered differential masks` | 대기 | — |
 | 25 | `test: validate findings on independent holdouts` | 대기 | — |
 | 26 | `docs: record attack scope and unresolved questions` | 대기 | — |
