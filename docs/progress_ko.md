@@ -35,7 +35,7 @@
 | 25 | `test: validate findings on independent holdouts` | 완료 | `340d3bbbb4eb347dc0897844bc1ab10c7f3e2861` / 고정후보4개×다른키4개×32768쌍=524288쌍 full 완료·16개 Wilson95 구간/합산비율 분리; 캐시/재선택 방지·구간경계/NIST검사 및 연구 smoke 통과
 | 26 | `docs: record attack scope and unresolved questions` | 완료 | `e7a8659f856524d36a7a23f8394777429bf73ebb` / 성공한1R/2R/3R 공격·부품 exact·전체 discovery/holdout·한계/미탐색 문서화; full6단계 complete41.06초/1200초·Release/로컬 ASanUBSan22/22·제품소비자 통과, 코어/KAT 불변
 | 27 | `feat: measure setup and block processing costs` | 완료 | `7365bebc249917946812fff176eedea2435c04dc` / native C 공개API11항목·최소5표본·KAT/전체길이왕복·checksum/환경/원시시간; Release23/23·샘플수 오류거부; 실제 비용경계 분리
-| 28 | `feat: add aes reference measurements` | 완료 | AES-256 padding off·FIPS197正逆KAT·16B/배치33항목×5표본; 기본/CPUcap0:0 실측과 provider/기능비트·초기화/호출경계 기록; Release23/23
+| 28 | `feat: add aes reference measurements` | 완료 | AES33항목×5표본·FIPS197 정역KAT·기본/CPUcap0:0 실측; Release23/23; 추가 타이머수정/오류진단·100µs clock 회귀 통과
 | 29 | `test: evaluate bit-compatible scalar optimizations` | 대기 | — |
 | 30 | `docs: report reproducible performance results` | 대기 | — |
 | 31 | `docs: finalize implementation and research handoff` | 대기 | — |
@@ -66,3 +66,7 @@ CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 
 26번 최종 범위: full 여섯 단계 complete(약41.06초/예산1,200초), Release22/22·로컬 ASan/UBSan22/22, 제품 단독 설치 소비자 성공. 코어5개 파일 해시는19번과 동일하며 수식·도메인·라운드·KAT를 변경하지 않았습니다. 0.3초 예산의 partial checkpoint에서도 완료5조건·5,120쌍이 보존됐습니다. 27~32번은 시작하지 않았습니다.
 
 CI 이력: 20번 macOS 작업은 cancelled(실행 단계 없음), 나머지3개 환경은 성공이었습니다. 이후21·22·23번 전체 CI는 성공했습니다. [20번](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43890280445), [23번](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43891830287). 마지막26번 자신의 SHA와 최종 CI는 인계 응답에서 기록합니다.
+
+추가 수정 `fix: handle sub-resolution benchmark warmups`: 28번 macOS의 benchmark_smoke가 native exit1로 실패했고 나머지21검사는 성공했습니다. 기존 Python wrapper가 stderr를 숨겨 원인 메시지는 로그에 없었습니다. 오류를 그대로 전달하도록 고치고, 단일 untimed warmup/calibration의0시간은 허용하되 정식 표본은 반복을 늘려 반드시 양수 시간을 확보합니다. 실제 macOS 재검증 결과는 후속 기록/인계에서 보고합니다. Linux 두 compiler의28번 검사는 성공했습니다.
+
+타이머 수정 로컬 검증: 100µs 단위로 시간을 양자화한 실제 clock shim에서 수정 전 실행파일은 nonpositive measurement interval로 실패하고 수정 후는33행×5표본 모두 양수 시간으로 완료했습니다. 일반 benchmark_smoke도 성공했습니다. 이 재현은 macOS 원인 단정이 아니라 동일한 짧은 시간 구간 실패 경로의 회귀 검사입니다.

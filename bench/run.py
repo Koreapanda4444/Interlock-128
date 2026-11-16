@@ -15,7 +15,9 @@ def main(args):
     root, build = args.source.resolve(), args.build_dir.resolve()
     command = [str(args.driver.resolve()), "--samples", str(args.samples),
                "--target-ms", str(args.target_ms)]
-    result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=240)
+    result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=240)
+    if result.returncode:
+        raise RuntimeError(f"native benchmark exited {result.returncode}: {result.stderr.strip()}")
     report = json.loads(result.stdout)
     report["measured_at_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     assert report["status"] == "complete" and len(report["checksum"]) == 16

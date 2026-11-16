@@ -75,7 +75,8 @@ static double measure(const bench_backend *b, enum cost cost, int decrypt,
     free(contexts);
     if (cost == READY || cost == FRESH) consume(output, cost == FRESH ? 16 : bytes);
     else sink = sink ^ (uint64_t)iterations;
-    if (elapsed <= 0) fail("nonpositive measurement interval");
+    /* A single untimed warmup can be shorter than the clock's resolution. */
+    if (elapsed < 0) fail("monotonic clock moved backwards");
     return elapsed;
 }
 
@@ -113,6 +114,11 @@ static void row(const bench_backend *b, enum cost cost, int decrypt, size_t byte
            name, cost == CREATE || cost == FREE ? 0 : bytes);
     for (unsigned s = 0; s < samples; ++s) {
         double elapsed = measure(b,cost,decrypt,bytes,iterations,ready,input,output);
+        while (elapsed == 0 && iterations < limit) {
+            iterations = iterations > limit/2 ? limit : iterations*2;
+            elapsed = measure(b,cost,decrypt,bytes,iterations,ready,input,output);
+        }
+        if (elapsed <= 0) fail("clock resolution insufficient even at iteration limit");
         if (s) putchar(',');
         printf("{\"iterations\":%zu,\"elapsed_seconds\":%.9f}", iterations, elapsed);
     }
