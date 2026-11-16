@@ -27,6 +27,14 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def extract_archive(data, destination):
+    with tarfile.open(fileobj=io.BytesIO(data)) as tree:
+        for member in tree.getmembers():
+            if not (member.isfile() or member.isdir()) or not (destination/member.name).resolve().is_relative_to(destination.resolve()):
+                raise ValueError("archive contains unsupported entry or escaping path")
+        tree.extractall(destination)
+
+
 def invariants(report):
     data = {k:v["data"] for k,v in report["experiments"].items()}
     for field in ("raw_count_file",):
@@ -48,8 +56,7 @@ def main(args):
     archive = subprocess.check_output(["git","-C",str(root),"archive","HEAD"])
     candidate = work/"candidate-source"
     candidate.mkdir()
-    with tarfile.open(fileobj=io.BytesIO(archive)) as tree:
-        tree.extractall(candidate, filter="data")
+    extract_archive(archive, candidate)
     source = candidate/"src/interlock.c"
     original = source.read_text()
     start = original.index("    uint32_t y0 =")
