@@ -38,3 +38,5 @@ def harness(ctx):
 STAGES = {"harness": harness}
 from recovery import recovery
 STAGES["recovery"] = recovery
+from constraints import constraints
+STAGES["constraints"] = constraints
