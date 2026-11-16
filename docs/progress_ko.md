@@ -27,8 +27,8 @@
 | 17 | `test: add sanitizer and deterministic fuzz checks` | 완료 | `26b01c9357af1ac50d2feef6cf66dff556957821` / 고정seed16,384조합; Release16/16·로컬 GCC ASan/UBSan16/16 진단0; 로컬 LSan은 ptrace 차단으로 미검증, CI GCC/Clang 누수검사 ON
 | 18 | `test: verify external c consumer builds` | 완료 | `eeaea3492effcf65549059861d49bb714c376eca` / 공개 CMake 패키지 설치·prefix 이동·독립 C 소비자 및 nm 심볼격리; Release/로컬 ASan·UBSan CTest17/17·제품단독 소비자 통과; CI17 GCC/Clang LSan까지 성공
 | 19 | `test: audit secret-dependent code paths` | 완료 | `2f113ac0404ef1752ea44910a5fe03c9d9243821` / 소스 비밀흐름·GCC14 x86_64 O3 제품10함수 수동 검토·재현 inventory/해시/소거보존; spill 한계 명시; Release/로컬 ASan·UBSan CTest18/18
-| 20 | `feat: add reproducible research harness` | 완료 | 연구/제품 target 분리·정확 seed 프레이밍·코드/실행파일 해시·완료/실패/timeout JSON; 기존18검사+연구2검사 통과, smoke/full 및 BUILD_TESTING=OFF 연구 빌드 검증
-| 21 | `test: reproduce outer subkey recovery` | 대기 | — |
+| 20 | `feat: add reproducible research harness` | 완료 | `b718dcbea78a567e65fc2219e7de80c087f5dc4d` / 연구/제품 target 분리·정확 seed 프레이밍·코드/실행파일 해시·완료/실패/timeout JSON; 기존18검사+연구2검사 통과, smoke/full 및 BUILD_TESTING=OFF 연구 빌드 검증
+| 21 | `test: reproduce outer subkey recovery` | 완료 | GF(2) L32 역행렬·32기저 양방향 항등·역 S 검증; 1R k0/k3 64비트 복구 full1024키×2쌍·다른 평문 FS 관계 모두 일치, smoke/연구검사 통과
 | 22 | `test: reproduce reduced-round differential constraints` | 대기 | — |
 | 23 | `feat: calculate exact component properties` | 대기 | — |
 | 24 | `feat: screen registered differential masks` | 대기 | — |

@@ -18,3 +18,5 @@ seed는 20261109입니다. 스트림은 `Interlock-128/research || NUL || label 
 각 결과에는 실제 소스·KAT JSON·실행파일 SHA-256, 컴파일러/구성/flags, OS·아키텍처·Python·OpenSSL 버전, seed·예산·실행시간·완료 사례를 기록합니다. Python과 C가 같은 OpenSSL을 사용할 수 있으므로 독립 SHAKE 구현 검증으로 부르지 않습니다. 커밋한 작은 결과 요약과 대량 build 산출물을 구분합니다.
 
 20번 검증은 정상 smoke/full과 연구 전용 빌드, 고정 seed 재현, C 드라이버 실패, 실제 자식 프로세스 timeout, 0초 예산 incomplete JSON, 초기화 실패 JSON을 포함합니다. 오류를 성공으로 바꾸거나 실패한 KAT를 새 출력으로 고치지 않습니다.
+
+21번 `recovery`: GF(2) 소거로 L32 역행렬을 만들고 32개 기저의 양방향 합성을 확인합니다. PRESENT 역치환과 함께 명세의 1R 식으로 k0/k3를 복구합니다. full에서 1,024키×서로 다른 평문 2개를 C로 암호화하고, 첫 쌍의 복구값을 실제 확장키와 비교한 뒤 다른 쌍의 FS 관계도 확인했습니다. 1,024키·2,048쌍 모두 일치했습니다. [결과](../research/results/recovery-full.json). 복구 대상은 첫 라운드 확장키의 64비트이며 256비트 마스터키나 전체 28라운드 키가 아닙니다.
