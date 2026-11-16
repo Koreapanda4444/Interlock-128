@@ -10,7 +10,7 @@
 
 배포 라이선스는 소유자가 아직 선택하지 않았습니다. 공개 배포 전 확인해야 합니다. OpenSSL 등 의존성의 라이선스는 별도로 적용됩니다.
 
-현재 **1~19번**까지 구현했습니다. 전체 28라운드 API, 독립 Python oracle, 1,024개 전체 prefix 대조, 계약·동시성·고정 seed 검사, sanitizer CI, 설치 패키지의 독립 C 소비자와 구현 경로 검토를 포함합니다. [검증 기록](docs/validation_ko.md), [sanitizer 결과](docs/sanitizers_ko.md), [소스·기계어 검토 범위](docs/implementation_audit_ko.md)를 구분해 확인할 수 있습니다. 20~32번의 암호분석·성능 평가·최종 인수는 후속 범위입니다.
+현재 **1~26번**까지 구현했습니다. 전체 28라운드 API와 독립 구현 대조·계약·sanitizer·설치 소비자 검증에 이어, 1R 서브키 복구·2R/3R 구별 조건·정확 부품 계산·등록된 discovery/holdout를 재현했습니다. [검증 기록](docs/validation_ko.md), [sanitizer](docs/sanitizers_ko.md), [소스·기계어 검토](docs/implementation_audit_ko.md), [연구 실행](docs/research_ko.md), [보안 결과와 미해결 항목](docs/security_ko.md)을 구분해 확인할 수 있습니다. 전체 연구 full 실행은 지정 예산 안에 완료됐으며 실제 기밀 보호의 승인이나 전라운드 안전성 증명은 아닙니다. 성능·AES 참고·최적화·최종 인수인 27~32번은 후속 범위입니다.
 
 ```c
 #include <interlock.h>

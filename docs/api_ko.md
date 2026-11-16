@@ -18,4 +18,4 @@
 
 `interlock_decrypt_block`은 같은 인자·길이·용량·겹침·출력 보존 계약으로 전체 28라운드를 역순 처리합니다. 추가 swap, whitening, 패딩, 운용모드는 없습니다. 공개 API에는 라운드 수나 중간 상태를 요청하는 인자가 없습니다.
 
-19번까지 독립 Python oracle, 전체 prefix 대조, 계약·동시성·sanitizer, 외부 C 소비자와 코드 경로 검토를 추가했습니다. 실행 결과와 한계는 validation_ko.md, sanitizers_ko.md, implementation_audit_ko.md를 참고합니다. 암호분석·성능과 최종 인수는 20번 이후 계획입니다.
+19번까지 독립 Python oracle, 전체 prefix 대조, 계약·동시성·sanitizer, 외부 C 소비자와 코드 경로 검토를 추가했습니다. 실행 결과와 한계는 validation_ko.md, sanitizers_ko.md, implementation_audit_ko.md를 참고합니다. 20~26번에서는 제한된 축소 라운드 공격·부품 계산·유한 스크리닝을 추가했습니다. 보안 판정과 한계는 security_ko.md를 참고합니다. 성능·최적화·최종 인수는 27번 이후 범위입니다.

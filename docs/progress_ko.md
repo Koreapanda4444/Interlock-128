@@ -32,8 +32,8 @@
 | 22 | `test: reproduce reduced-round differential constraints` | 완료 | `2511749fb0ccf1d9a2e09e9d477519623b3f9385` / 2R 네값·3R 지원상계/10개 강제0비트 정확계산; full128키×128쌍 각16384쌍 C 검증 반례0·smoke/연구검사 통과
 | 23 | `feat: calculate exact component properties` | 완료 | `baa538a5df6ae6f4edfb092ea8eb18c1b1025e5f` / DDT/LAT/ANF 전수·행합/Parseval/진리표 재구성; 4/16·Walsh8/16·차수2,3,3,3·L32 rank32 및 기존 역행렬 항등 확인, smoke/연구검사 통과
 | 24 | `feat: screen registered differential masks` | 완료 | `d9ba986c02fb541ddf40f742b4a960b8d9b62d31` / 사전등록 4/8/16/28R×입력128×1024쌍=524288쌍, 출력128계수·65536비교; 라운드별후보와동률규칙을 원시행렬로 재검산·반복결과일치, smoke/연구검사 통과
-| 25 | `test: validate findings on independent holdouts` | 완료 | 고정후보4개×다른키4개×32768쌍=524288쌍 full 완료·16개 Wilson95 구간/합산비율 분리; 캐시/재선택 방지·구간경계/NIST검사 및 연구 smoke 통과
-| 26 | `docs: record attack scope and unresolved questions` | 대기 | — |
+| 25 | `test: validate findings on independent holdouts` | 완료 | `340d3bbbb4eb347dc0897844bc1ab10c7f3e2861` / 고정후보4개×다른키4개×32768쌍=524288쌍 full 완료·16개 Wilson95 구간/합산비율 분리; 캐시/재선택 방지·구간경계/NIST검사 및 연구 smoke 통과
+| 26 | `docs: record attack scope and unresolved questions` | 완료 | 成功한1R/2R/3R 공격·부품 exact·전체 discovery/holdout·한계/미탐색 문서화; full6단계 complete41.06초/1200초·Release/로컬 ASanUBSan22/22·제품소비자 통과, 코어/KAT 불변
 | 27 | `feat: measure setup and block processing costs` | 대기 | — |
 | 28 | `feat: add aes reference measurements` | 대기 | — |
 | 29 | `test: evaluate bit-compatible scalar optimizations` | 대기 | — |
@@ -62,3 +62,7 @@ CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 
 19번 로컬 최종: Release CTest18/18, ASan·UBSan CTest18/18 통과(로컬 detect_leaks=0, LSan ptrace 제약). 대표 GCC14 산출물 10개 함수 검토; S-box 조건분기/명시 데이터 주소 없음, 컴파일러 spill 잔여 사본 한계를 기록했습니다. CI 누수 검사는 계속 detect_leaks=1입니다.
 
 19번 최종 CI: Linux GCC·Clang, Windows MSVC x64, macOS 모두 성공 확인. [실행](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42737146398).
+
+26번 최종 범위: full 여섯 단계 complete(약41.06초/예산1,200초), Release22/22·로컬 ASan/UBSan22/22, 제품 단독 설치 소비자 성공. 코어5개 파일 해시는19번과 동일하며 수식·도메인·라운드·KAT를 변경하지 않았습니다. 0.3초 예산의 partial checkpoint에서도 완료5조건·5,120쌍이 보존됐습니다. 27~32번은 시작하지 않았습니다.
+
+CI 이력: 20번 macOS 작업은 cancelled(실행 단계 없음), 나머지3개 환경은 성공이었습니다. 이후21·22·23번 전체 CI는 성공했습니다. [20번](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43890280445), [23번](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43891830287). 마지막26번 자신의 SHA와 최종 CI는 인계 응답에서 기록합니다.

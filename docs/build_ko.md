@@ -26,3 +26,5 @@ ctest --test-dir build-consumer -C Release --output-on-failure
 ```
 
 위 prefix는 실제 설치 경로로 바꿉니다. Windows에서는 본체와 같은 OpenSSL/vcpkg toolchain·triplet을 소비자 configure에도 지정합니다. 자동 `external_consumer` 검사는 본체 configure 값을 전달합니다. OpenSSL은 별도 의존성이며 패키지가 자체 복제·배포하지 않습니다.
+
+20~26번 연구 옵션을 켠 Linux x86_64 구성은 총22개 CTest 검사, macOS·Windows는 ELF inventory를 제외한21개입니다. 옵션을 끈 기존 구성의 검사는 유지됩니다. 연구 실행은 `docs/research_ko.md`를 참고합니다. 이번 로컬 Release와 Debug ASan·UBSan은 각각22/22 통과했습니다. 로컬 LSan은 ptrace 차단을 다시 확인했으며 제외 상태와 CI 누수 검사를 구분합니다. 제품 전용 BUILD_TESTING=OFF·CRYPTO_BUILD_RESEARCH=OFF에서도 설치·재배치·외부 소비자·제품 심볼 격리 검사가 통과했습니다.

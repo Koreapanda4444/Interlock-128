@@ -30,3 +30,5 @@ seed는 20261109입니다. 스트림은 `Interlock-128/research || NUL || label 
 25번 `holdout`: 24번의 후보4개를 유지하고 discovery와 다른 키 index1~4, 다른 holdout label의 새 표본으로 각32,768쌍을 확인했습니다. 16개 cohort·524,288쌍을 완료했습니다. discovery 재생성과 원시 계수 hash/전역 최대·동률/소스·실행파일 검증을 먼저 수행하며 holdout 결과로 후보를 다시 고르지 않습니다. 명시적 `--discovery-json` 캐시가 달라지면 실패하고 재실행을 요구합니다. [결과](../research/results/holdout-full.json)에 각 키의 반전 횟수·비율·Wilson95% 구간과 키4개의 단순 합산 비율을 분리해 기록했습니다.
 
 Wilson 구간은 [NIST의 score interval 공식](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm)을 사용했습니다. 경계 0/n·n/n, 대칭성, 중앙값 항등과 NIST의 반올림 예제를 확인했습니다. 16개 구간은 각각의 명목95% 구간이며 동시95% 보장을 주장하지 않습니다. 가족 단위 유의성 검정과 discovery의 선택 후 p-value는 계산하지 않습니다. 구간은 고정 생성 표본에 대한 Bernoulli 참고모형의 기술통계이며 암호 보안 강도의 구간이나 전체 키 모집단에 대한 증명이 아닙니다.
+
+26번 최종 실행은 여섯 단계 전부 complete였으며, 기본 full 예산1,200초 중 약41.06초를 사용했습니다. [통합 기준선](../research/results/full-baseline.json)은 고정 후보와 cohort별 결과가 개별 실행과 같음을 확인한 기록입니다. 0.3초 강제 예산에서도 완료한 discovery5조건·5,120쌍을 보존한 incomplete checkpoint를 확인했습니다. 해석과 미탐색 공격군은 [security_ko.md](security_ko.md)에 정리했습니다. 27번 성능 측정은 시작하지 않았습니다.
