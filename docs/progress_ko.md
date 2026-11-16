@@ -38,8 +38,8 @@
 | 28 | `feat: add aes reference measurements` | 완료 | `8119660bcd633e4f92a8a78e5bfd04f04facd85e` / AES33항목×5표본·FIPS197 정역KAT·기본/CPUcap0:0 실측; Release23/23; 추가 타이머수정/오류진단·100µs clock 회귀 통과
 | 29 | `test: evaluate bit-compatible scalar optimizations` | 완료 | `03326f824f10345b328ccff29c814e09e46e4cb6` / 실제 ANF 공통항 변형 생성·원본/후보 Release23/23 및 full6단계 동일; 순서교대3쌍×5표본·기계어차이 확인; 개선 불일관으로 제품코어 유지
 | 30 | `docs: report reproducible performance results` | 완료 | `a6c2d383dd3488875c5ad2949bc8f6032c079af0` / 최종실측33항목×5표본 재실행·기본/CPUcap제한·키생성/해제/새키/16B~1MiB 표·환경/측정경계/과거14.97 분리; 실험archive Python3.11 호환/API·경로탈출 검사
-| 31 | `docs: finalize implementation and research handoff` | 완료 | README/API/빌드/연구/보안/성능/인계 문서 정합·모든상대링크 확인; 숨은ZIP/옛대화 불필요·실험범위/미검증/라이선스 미정 명시; 32번 인수 예정
-| 32 | `test: verify clean-checkout acceptance` | 대기 | — |
+| 31 | `docs: finalize implementation and research handoff` | 완료 | `9c93974a0edb8d155788a6613bea111daed75aa2` / README/API/빌드/연구/보안/성능/인계 문서 정합·모든상대링크 확인; 숨은ZIP/옛대화 불필요·실험범위/미검증/라이선스 미정 명시; 32번 인수 예정
+| 32 | `test: verify clean-checkout acceptance` | 완료 | hardlink 없는 새clone31번: Release/ASanUBSan 각23/23·9.1target·full6단계기준선동일·bench33×5·제품설치/소비자·연구/벤치독립; LSan ptrace 별도; 최종SHA/CI 인계보고
 
 CI 5번 (`526221f`): Linux GCC/Clang 성공; Windows는 OpenSSL 설치 중, macOS는 러너 대기. [실행 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42648381420).
 
@@ -72,3 +72,7 @@ CI 이력: 20번 macOS 작업은 cancelled(실행 단계 없음), 나머지3개 
 타이머 수정 로컬 검증: 100µs 단위로 시간을 양자화한 실제 clock shim에서 수정 전 실행파일은 nonpositive measurement interval로 실패하고 수정 후는33행×5표본 모두 양수 시간으로 완료했습니다. 일반 benchmark_smoke도 성공했습니다. 이 재현은 macOS 원인 단정이 아니라 동일한 짧은 시간 구간 실패 경로의 회귀 검사입니다.
 
 추가 수정 SHA: `13e20c4748de9e9d2a5a15fb8a7c47ab128f209f` (`fix: handle sub-resolution benchmark warmups`). 계획32개와 별도로 필요한 타이머 회귀 수정1개입니다. 26번 최종 CI는 Linux GCC/Clang·Windows·macOS 모두 성공했습니다. [26번 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43897959537). 이후 상태는 최신 SHA의 CI로 별도 보고합니다.
+
+최종 로컬 인수: 원격31번과 일치하는 `9c93974a0edb8d155788a6613bea111daed75aa2`를 hardlink 없는 새clone으로 구성해 Release23/23·Debug ASan/UBSan23/23, 명세9.1 target 전부·full6단계·33항목 벤치·제품소비자·연구/벤치독립구성을 검증했습니다. LSan ptrace 차단은 별도 기록했습니다. 최종32번 자신의 SHA·새clone 재확인·원격CI 결과는 인계 응답에서 보고합니다.
+
+타이머 수정 후 `13e20c4`와29·30·31번의 Linux GCC/Clang·macOS CI는 성공했습니다. 28번 macOS 실패는 수정 이후 재현되지 않았습니다. 31번 [CI 기록](https://github.com/Koreapanda4444/Interlock-128/actions/runs/43911573864). Windows 상태는 최종SHA에서 별도 확인합니다.

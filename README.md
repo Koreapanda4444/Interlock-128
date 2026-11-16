@@ -10,7 +10,7 @@
 
 배포 라이선스는 소유자가 아직 선택하지 않았습니다. 공개 배포 전 확인해야 합니다. OpenSSL 등 의존성의 라이선스는 별도로 적용됩니다.
 
-현재 **1~31번**을 완료했고 마지막 clean-checkout 인수를 진행합니다. 전체28라운드 공개 API, 독립 Python 대조, 메모리·실패·동시성 검사, 제한된 암호분석, 네이티브 비용 측정과 AES 참고 비교를 제공합니다. 실제 스칼라 최적화 후보는 검증했지만 효과가 일관되지 않아 기존 코어를 유지했습니다.
+계획 **1~32번을 완료**했습니다. clean-checkout 재현과 검증 기록은 [최종 인수](docs/acceptance_ko.md)에 있습니다. 전체28라운드 공개 API, 독립 Python 대조, 메모리·실패·동시성 검사, 제한된 암호분석, 네이티브 비용 측정과 AES 참고 비교를 제공합니다. 실제 스칼라 최적화 후보는 검증했지만 효과가 일관되지 않아 기존 코어를 유지했습니다.
 
 - [빌드·전체 재현](docs/build_ko.md), [API 계약](docs/api_ko.md), [독립 검증](docs/validation_ko.md), [sanitizer 범위](docs/sanitizers_ko.md)
 - [연구 실행](docs/research_ko.md), [공격 결과와 한계](docs/security_ko.md), [소스·기계어 검토](docs/implementation_audit_ko.md)

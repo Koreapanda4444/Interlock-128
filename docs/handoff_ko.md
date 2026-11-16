@@ -2,7 +2,7 @@
 
 ## 현재 범위
 
-규범 사양은 [spec_ko.md](spec_ko.md) 하나입니다. C11 전체28라운드 공개 API, OpenSSL SHAKE 키 확장, Python 독립 oracle, 모든 prefix·실패·버퍼·수명·동시성·sanitizer·설치 소비자 검사, 제한된 연구, 비용 측정과 AES 참고가 구현됐습니다. 계획1~31번을 마쳤고32번 clean-checkout 인수를 진행합니다. 공개 인터페이스의 키/블록 길이·도메인·KAT는 유지했습니다.
+규범 사양은 [spec_ko.md](spec_ko.md) 하나입니다. C11 전체28라운드 공개 API, OpenSSL SHAKE 키 확장, Python 독립 oracle, 모든 prefix·실패·버퍼·수명·동시성·sanitizer·설치 소비자 검사, 제한된 연구, 비용 측정과 AES 참고가 구현됐습니다. 계획1~32번과 clean-checkout 인수를 완료했습니다. [최종 인수 기록](acceptance_ko.md)에 실제 검증 SHA와 범위를 남겼습니다. 공개 인터페이스의 키/블록 길이·도메인·KAT는 유지했습니다.
 
 | 읽을 문서 | 확인할 내용 |
 | --- | --- |

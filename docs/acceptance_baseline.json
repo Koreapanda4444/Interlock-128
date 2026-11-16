@@ -1,0 +1,206 @@
+{
+  "benchmark": {
+    "minimum_samples": 5,
+    "report_sha256": "54a5437848bf732d191d485475a20033ceb1800bc567578668d38fd2db61a772",
+    "rows": 33,
+    "status": "complete",
+    "timings_are_local_only": true
+  },
+  "checkout_clean_before_and_after": true,
+  "clone_method": "git clone --no-hardlinks --no-checkout from local objects; remote SHA checked separately through GitHub",
+  "commands": [
+    {
+      "check": "clone",
+      "elapsed_seconds": 0.27671,
+      "log_sha256": "2341c3e3ecf3a6237f8cff1d224cf79cfc5ee108e199fd8df3aa4134a5652a3e",
+      "returncode": 0
+    },
+    {
+      "check": "checkout",
+      "elapsed_seconds": 0.016993,
+      "log_sha256": "79e2c859ce48946f122bf8bd7288e8dcb9826d4efb0e42e5f892a6e3dfd4aab9",
+      "returncode": 0
+    },
+    {
+      "check": "head",
+      "elapsed_seconds": 0.004334,
+      "log_sha256": "305f8a72763fb6fe87029911be032e49b141633e88c90eb0e112668628454872",
+      "returncode": 0
+    },
+    {
+      "check": "initial-status",
+      "elapsed_seconds": 0.00651,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0
+    },
+    {
+      "check": "release-configure",
+      "elapsed_seconds": 1.006026,
+      "log_sha256": "1e524c8a41ea5c476fe7e516a79ebcfee562313ef565ace3e1f9e5a4729ccf32",
+      "returncode": 0
+    },
+    {
+      "check": "release-build",
+      "elapsed_seconds": 1.728203,
+      "log_sha256": "51acd494df15c74b32d2bd9e6860080c0f899cb0c4c6e2d17f9c2107aa61937d",
+      "returncode": 0
+    },
+    {
+      "check": "release-ctest",
+      "elapsed_seconds": 13.854026,
+      "log_sha256": "34fbe22f7389d4e09787aa9816859e773e5ff53244adb21c1965785cfcb479a9",
+      "returncode": 0
+    },
+    {
+      "check": "check-differential",
+      "elapsed_seconds": 9.359342,
+      "log_sha256": "374606de455b82bbedf89acfa090cd2b17af723e86389427f66a384b25feefe2",
+      "returncode": 0
+    },
+    {
+      "check": "research-smoke",
+      "elapsed_seconds": 1.55438,
+      "log_sha256": "e7d168bcc1ee7fe55876732f5a128a86a5534828bd4dbe6950e2a3c67c3a1882",
+      "returncode": 0
+    },
+    {
+      "check": "research-full",
+      "elapsed_seconds": 43.571082,
+      "log_sha256": "7fb20ec8b8516081248b1e8a81542c7f5380cdbc667affd7c78ee37c38602488",
+      "returncode": 0
+    },
+    {
+      "check": "bench",
+      "elapsed_seconds": 25.26563,
+      "log_sha256": "cc84b4e905b1a7a8dc90127c9a69675591b33145cfd5bfc6c3e62d753ce8dfa9",
+      "returncode": 0
+    },
+    {
+      "check": "product-configure",
+      "elapsed_seconds": 0.723404,
+      "log_sha256": "47d08f3f6ec749dd0e5e8dd3ef43413534384e4195f0f976082ce0528c33f569",
+      "returncode": 0
+    },
+    {
+      "check": "product-build",
+      "elapsed_seconds": 0.214763,
+      "log_sha256": "c79f5fa9f74af3b05adf34d651cafcf8be486a6a56128adc3e7394debc6ff480",
+      "returncode": 0
+    },
+    {
+      "check": "product-consumer",
+      "elapsed_seconds": 0.640476,
+      "log_sha256": "edcef8f986d9d366070d4bd4729f4c7b860e195ca123a6fb602ebfc41420ac34",
+      "returncode": 0
+    },
+    {
+      "check": "research-only-configure",
+      "elapsed_seconds": 0.727857,
+      "log_sha256": "1e42ac1cd9b4d1d2cb1eb7a671a0aeee9c6ecd8d276c1017cb20084356424fef",
+      "returncode": 0
+    },
+    {
+      "check": "research-only-build",
+      "elapsed_seconds": 4.468806,
+      "log_sha256": "b48a90562a8c7f8b1feb8f548d0bef54c7c765a5a1cf89d0f4730467bac120be",
+      "returncode": 0
+    },
+    {
+      "check": "research-only-target",
+      "elapsed_seconds": 1.940281,
+      "log_sha256": "886b82075adf213c0c8b8311bba21d98cfa3016dafbe984344c3438721216d55",
+      "returncode": 0
+    },
+    {
+      "check": "bench-only-configure",
+      "elapsed_seconds": 0.952298,
+      "log_sha256": "edf8c1564f6795035e3fb8da5705aedf4148da181e4d08f395bf1b9b7c448a74",
+      "returncode": 0
+    },
+    {
+      "check": "bench-only-build",
+      "elapsed_seconds": 0.78069,
+      "log_sha256": "cd63f508e500d609abb785ea1fc171537d8edb89438701009a434fc80c289db0",
+      "returncode": 0
+    },
+    {
+      "check": "bench-only-target",
+      "elapsed_seconds": 21.824857,
+      "log_sha256": "e2cf95a06919b76ce9a3f7a1165b161ae8985cc6b0c364acbb7f64a9e709416b",
+      "returncode": 0
+    },
+    {
+      "check": "sanitize-configure",
+      "elapsed_seconds": 1.05798,
+      "log_sha256": "1328f49cfb8d0e45e4e12044bd6068345ddda2188b4e01fcdeeabecc6a4867f5",
+      "returncode": 0
+    },
+    {
+      "check": "sanitize-build",
+      "elapsed_seconds": 1.498815,
+      "log_sha256": "f49e0545adb3776962734140e538ed50fc1c0395e1c6d3a844d4df1dba49b8b8",
+      "returncode": 0
+    },
+    {
+      "check": "lsan-probe",
+      "elapsed_seconds": 0.00673,
+      "log_sha256": "157d0767723663797cdc7544fc234fba22c679841a8d3b9257511f787603d9de",
+      "returncode": 1
+    },
+    {
+      "check": "sanitize-ctest",
+      "elapsed_seconds": 74.112615,
+      "log_sha256": "c11d5517d3efaabcffc84efd086567e0890b72425ae4a6962d48cad9a18a1f93",
+      "returncode": 0
+    },
+    {
+      "check": "final-status",
+      "elapsed_seconds": 0.008067,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "returncode": 0
+    }
+  ],
+  "commit": "9c93974a0edb8d155788a6613bea111daed75aa2",
+  "core_source_sha256": {
+    "include/interlock.h": "8ecc990655407c33655b89fddac0843a3192f2e92fa2d6ae84c33266fe079da8",
+    "src/interlock.c": "615acf0cb2eae93588f2283d51854ed4e0f71b24f26fb39012cbadb741feaeab",
+    "src/interlock_key.c": "79584dbefe0f76f0a7ee05d8b7ab2881826869f6f1a66d1ea9adc8f9e33c1b93",
+    "src/internal.h": "f464d43317dc4f10e0206ca2f32ebd06e740bff35ce02d32729f08bfdf717ae6",
+    "src/support.c": "1647c853d09cd7ca0211fae4431fa3bef75354afe5c91e4ccc2be857bec88c37"
+  },
+  "ctest_summaries": {
+    "release-ctest": {
+      "failed": 0,
+      "passed": 23
+    },
+    "sanitize-ctest": {
+      "failed": 0,
+      "passed": 23
+    }
+  },
+  "driver_sha256": "b92ac8c08ee19f0f89705011d15ae617e94e3327799349c816db9b9b40e593f0",
+  "host": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "local_lsan": "blocked by ptrace; not a leak pass",
+  "local_sanitizer_options": {
+    "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1"
+  },
+  "product_install_consumer_and_private_symbol_isolation": "passed",
+  "research": {
+    "data_matches_registered_baseline": true,
+    "report_sha256": "322d2e2a2fc9b7238fddf58d8b2a70e57740debaa2b839cfef53f1de9eddf963",
+    "stages": [
+      "components",
+      "constraints",
+      "discovery",
+      "harness",
+      "holdout",
+      "recovery"
+    ],
+    "status": "complete"
+  },
+  "scope": "spec9.1 commands and local acceptance; remote CI and licensing recorded separately; no cryptographic approval",
+  "started_at_utc": "2026-11-16T16:48:34.741664+00:00",
+  "status": "complete",
+  "summary_note": "CTest4.4 uses the concise summary form; counts were read from the recorded logs after the run. The committed runner accepts both forms."
+}
