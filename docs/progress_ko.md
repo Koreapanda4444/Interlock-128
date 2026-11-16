@@ -1,10 +1,10 @@
 # 구현 진행표
 
-이번 요청 범위는 **14~19번**이며, 1~13번에 이어 진행합니다. 20~32번은 후속 작업으로 남깁니다.
+이번 요청 범위는 **20~26번**이며, 1~19번에 이어 진행합니다. 27~32번은 후속 작업입니다.
 
 대상: `Koreapanda4444/Interlock-128`, `main`. 원격 비어 있음과 push 권한 확인. 이전 코어 미승계.
 
-단계별 구현·검증 후 커밋과 원격 반영. 원격 반영 완료부터 다음 단계 작업 시작까지 최소 300초 정지. 최종 SHA는 인계 보고에 기록.
+단계별 구현·검증 후 커밋과 원격 반영. 2026-11-16 사용자 변경 지시에 따라 푸시 후 5분 정지를 해제하고 계속 진행합니다. 최종 SHA는 인계 보고에 기록.
 
 | 번호 | 제목 | 상태 | 완료 SHA / 검증 |
 | ---: | --- | --- | --- |
@@ -26,8 +26,8 @@
 | 16 | `test: cover buffer and lifetime contracts` | 완료 | `774a82cf24ab9b6e21958fb957e0bba26558cf58` / 길이6×용량4 조합·±32오프셋·슬롯/키 부분겹침·6개 실패주입·해제 전 소거 확인; 제품 컨텍스트 4스레드×4096회 왕복; CTest15/15
 | 17 | `test: add sanitizer and deterministic fuzz checks` | 완료 | `26b01c9357af1ac50d2feef6cf66dff556957821` / 고정seed16,384조합; Release16/16·로컬 GCC ASan/UBSan16/16 진단0; 로컬 LSan은 ptrace 차단으로 미검증, CI GCC/Clang 누수검사 ON
 | 18 | `test: verify external c consumer builds` | 완료 | `eeaea3492effcf65549059861d49bb714c376eca` / 공개 CMake 패키지 설치·prefix 이동·독립 C 소비자 및 nm 심볼격리; Release/로컬 ASan·UBSan CTest17/17·제품단독 소비자 통과; CI17 GCC/Clang LSan까지 성공
-| 19 | `test: audit secret-dependent code paths` | 완료 | 소스 비밀흐름·GCC14 x86_64 O3 제품10함수 수동 검토·재현 inventory/해시/소거보존; spill 한계 명시; Release/로컬 ASan·UBSan CTest18/18
-| 20 | `feat: add reproducible research harness` | 대기 | — |
+| 19 | `test: audit secret-dependent code paths` | 완료 | `2f113ac0404ef1752ea44910a5fe03c9d9243821` / 소스 비밀흐름·GCC14 x86_64 O3 제품10함수 수동 검토·재현 inventory/해시/소거보존; spill 한계 명시; Release/로컬 ASan·UBSan CTest18/18
+| 20 | `feat: add reproducible research harness` | 완료 | 연구/제품 target 분리·정확 seed 프레이밍·코드/실행파일 해시·완료/실패/timeout JSON; 기존18검사+연구2검사 통과, smoke/full 및 BUILD_TESTING=OFF 연구 빌드 검증
 | 21 | `test: reproduce outer subkey recovery` | 대기 | — |
 | 22 | `test: reproduce reduced-round differential constraints` | 대기 | — |
 | 23 | `feat: calculate exact component properties` | 대기 | — |
@@ -60,3 +60,5 @@ CI 12번 (`5ba9dcc`): Linux GCC·Clang 성공, Windows 실행 중, macOS 러너 
 19번 요청 종료 범위: 1~19번 구현·검증·원격 반영. 20~32번 연구/성능/최종 인수는 대기이며 시작하지 않습니다. 마지막 19번 자신의 SHA와 최종 CI 결과는 인계 응답에서 기록합니다.
 
 19번 로컬 최종: Release CTest18/18, ASan·UBSan CTest18/18 통과(로컬 detect_leaks=0, LSan ptrace 제약). 대표 GCC14 산출물 10개 함수 검토; S-box 조건분기/명시 데이터 주소 없음, 컴파일러 spill 잔여 사본 한계를 기록했습니다. CI 누수 검사는 계속 detect_leaks=1입니다.
+
+19번 최종 CI: Linux GCC·Clang, Windows MSVC x64, macOS 모두 성공 확인. [실행](https://github.com/Koreapanda4444/Interlock-128/actions/runs/42737146398).
