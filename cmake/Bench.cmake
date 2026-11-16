@@ -1,4 +1,4 @@
-add_executable(interlock_bench bench/native.c bench/interlock_backend.c)
+add_executable(interlock_bench bench/native.c bench/interlock_backend.c bench/aes_backend.c)
 target_include_directories(interlock_bench PRIVATE bench)
 target_link_libraries(interlock_bench PRIVATE interlock OpenSSL::Crypto)
 if(MSVC)

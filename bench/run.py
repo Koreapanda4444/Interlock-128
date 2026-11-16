@@ -1,5 +1,6 @@
 """Run native timings and attach reproducible build/source/environment evidence."""
 import argparse
+import datetime
 import hashlib
 import json
 import math
@@ -16,6 +17,7 @@ def main(args):
                "--target-ms", str(args.target_ms)]
     result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=240)
     report = json.loads(result.stdout)
+    report["measured_at_utc"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
     assert report["status"] == "complete" and len(report["checksum"]) == 16
     assert report["rows"]
     for row in report["rows"]:
@@ -63,6 +65,23 @@ def main(args):
         "excluded":"data generation, buffer allocation, correctness checks, checksum and JSON printing; no LTO requested",
         "samples":"three untimed warmup iterations and untimed doubling calibration; at least five timed samples; target is a calibration goal, not a guaranteed minimum",
         "interpretation":"independent block API calls; no cipher mode or security equivalence claim"}
+    report["aes_boundaries"] = {
+        "algorithm":"OpenSSL fetched AES-256-ECB; padding disabled; provider name recorded",
+        "acceleration":"OpenSSL automatic runtime dispatch using reported CPU capabilities; actual executed instruction path not traced",
+        "key_create":"EVP_CIPHER_CTX_new + EVP_CipherInit_ex2 + set_padding(0); algorithm fetch excluded",
+        "key_free":"EVP_CIPHER_CTX_free; contexts precreated; no application cleanse wrapper added",
+        "fresh_key_encrypt_free":"context allocation/init + 16-byte Update + Final (zero output) + context free",
+        "ready":"context initialized before samples; Update per block versus per buffer are separate rows; Final checked after timed rows",
+        "correctness":"fixed FIPS197 Appendix C.3 encrypt/decrypt + every-buffer roundtrip + timed output equality + zero-length Final",
+        "scope":"reference throughput/call overhead only; not equal-security comparison or a file-encryption API"}
+    if platform.machine().lower() in ("x86_64", "amd64", "i386", "i686"):
+        try:
+            caps = [int(x, 0) for x in report["cpu_settings"].split("=", 1)[1].split()[0].split(":")]
+            report["aes_capabilities"] = {"aesni_bit":bool(caps[0] & (1 << 57)),
+                                          "vaes_bit":bool(caps[1] & (1 << 41)),
+                                          "meaning":"reported dispatch capability bits; instruction path not traced"}
+        except (IndexError, ValueError):
+            report["aes_capabilities"] = {"status":"CPU settings format unavailable; not inferred"}
     args.output.parent.mkdir(parents=True,exist_ok=True)
     temporary = args.output.with_suffix(".tmp")
     temporary.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n",encoding="utf-8")

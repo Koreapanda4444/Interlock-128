@@ -18,5 +18,5 @@ static int process(void *ctx, int decrypt, const uint8_t *in, uint8_t *out, size
     return 1;
 }
 const bench_backend bench_interlock = {
-    "Interlock-128", "one public API call per 16 bytes; full 28 rounds", create, destroy, process
+    "Interlock-128", "one public API call per 16 bytes; full 28 rounds", create, destroy, process, NULL
 };

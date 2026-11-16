@@ -66,6 +66,7 @@ static double measure(const bench_backend *b, enum cost cost, int decrypt,
             void *ctx = NULL;
             if (!b->create(&ctx, key, 0)) fail("fresh key creation failed");
             if (!b->process(ctx, 0, input, output, 16)) fail("fresh block failed");
+            if (b->finish != NULL && !b->finish(ctx)) fail("fresh final failed");
             b->destroy(ctx);
         }
     }
@@ -122,7 +123,7 @@ int main(int argc, char **argv) {
     unsigned samples = 5;
     double target = 0.04;
     const size_t sizes[] = {16,1024,16384,1048576};
-    const bench_backend *backends[] = {&bench_interlock};
+    const bench_backend *backends[] = {&bench_interlock,&bench_aes_blocks,&bench_aes_batch};
     uint8_t *plain, *cipher, *output;
     int first = 1;
     for (int j = 1; j < argc; ++j) {
@@ -140,6 +141,7 @@ int main(int argc, char **argv) {
     plain = malloc(1048576); cipher = malloc(1048576); output = malloc(1048576);
     if (!plain || !cipher || !output) fail("data allocation failed");
     for (size_t j = 0; j < 1048576; ++j) plain[j] = (uint8_t)(j*37u + j/256u);
+    if (!bench_aes_init()) fail("AES fetch or FIPS197 KAT failed");
     printf("{\"schema_version\":1,\"status\":\"complete\",\"correctness\":\"KAT and all-size roundtrips\",\"timer\":");
 #ifdef _WIN32
     json_string("QueryPerformanceCounter");
@@ -148,6 +150,7 @@ int main(int argc, char **argv) {
 #endif
     printf(",\"openssl\":"); json_string(OpenSSL_version(OPENSSL_VERSION));
     printf(",\"cpu_settings\":"); json_string(OpenSSL_version(OPENSSL_CPU_INFO));
+    printf(",\"aes_provider\":"); json_string(bench_aes_provider());
     printf(",\"target_seconds\":%.6f,\"rows\":[", target);
     for (size_t i = 0; i < sizeof(backends)/sizeof(backends[0]); ++i) {
         const bench_backend *b = backends[i];
@@ -164,9 +167,11 @@ int main(int argc, char **argv) {
             row(b,READY,1,bytes,samples,target,dec,cipher,output,&first);
             if (memcmp(output,plain,bytes) != 0) fail("timed decryption mismatch");
         }
+        if (b->finish != NULL && (!b->finish(dec) || !b->finish(enc))) fail("ready final failed");
         b->destroy(dec); b->destroy(enc);
     }
     printf("],\"checksum\":\"%016" PRIx64 "\"}\n", sink);
     free(output); free(cipher); free(plain);
+    bench_aes_cleanup();
     return 0;
 }

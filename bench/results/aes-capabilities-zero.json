@@ -1,0 +1,1230 @@
+{
+  "aes_boundaries": {
+    "acceleration": "OpenSSL automatic runtime dispatch using reported CPU capabilities; actual executed instruction path not traced",
+    "algorithm": "OpenSSL fetched AES-256-ECB; padding disabled; provider name recorded",
+    "correctness": "fixed FIPS197 Appendix C.3 encrypt/decrypt + every-buffer roundtrip + timed output equality + zero-length Final",
+    "fresh_key_encrypt_free": "context allocation/init + 16-byte Update + Final (zero output) + context free",
+    "key_create": "EVP_CIPHER_CTX_new + EVP_CipherInit_ex2 + set_padding(0); algorithm fetch excluded",
+    "key_free": "EVP_CIPHER_CTX_free; contexts precreated; no application cleanse wrapper added",
+    "ready": "context initialized before samples; Update per block versus per buffer are separate rows; Final checked after timed rows",
+    "scope": "reference throughput/call overhead only; not equal-security comparison or a file-encryption API"
+  },
+  "aes_capabilities": {
+    "aesni_bit": false,
+    "meaning": "reported dispatch capability bits; instruction path not traced",
+    "vaes_bit": false
+  },
+  "aes_provider": "default",
+  "boundaries": {
+    "excluded": "data generation, buffer allocation, correctness checks, checksum and JSON printing; no LTO requested",
+    "fresh_key_encrypt_free": "create + one public 16-byte encryption + cleanse/free; no input generation",
+    "interpretation": "independent block API calls; no cipher mode or security equivalence claim",
+    "key_create": "callback/public API + allocation + SHAKE256 + 448-byte schedule; pointer-array allocation and later free excluded",
+    "key_free": "callback/public API + schedule cleanse + free; preparation and pointer-array free excluded",
+    "ready": "prepared key reused; callback + loop + public argument checks + full 28 rounds + public cleanup; no key creation",
+    "samples": "three untimed warmup iterations and untimed doubling calibration; at least five timed samples; target is a calibration goal, not a guaranteed minimum"
+  },
+  "checksum": "75efd32ec40bb862",
+  "correctness": "KAT and all-size roundtrips",
+  "cpu_settings": "CPUINFO: OPENSSL_ia32cap=0x0000000000000400:0x0000000000000000:0x0000000000000000:0x0000000000000000:0x0000000000000000 env:0:0",
+  "environment": {
+    "affinity_and_frequency": "not pinned or controlled; shared host; no cycle-count claim",
+    "architecture": "x86_64",
+    "cache": {
+      "CMAKE_C_FLAGS": "",
+      "CMAKE_C_FLAGS_DEBUG": "-g",
+      "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_GENERATOR": "Unix Makefiles",
+      "CRYPTO_ENABLE_SANITIZERS": "OFF"
+    },
+    "compiler": "GNU 14.2.0",
+    "configuration": "Release",
+    "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+    "logical_cpus": 9,
+    "openssl_ia32cap_override": "0:0",
+    "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "measured_at_utc": "2026-11-16T16:37:18.677533+00:00",
+  "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+  "provenance": {
+    "command": [
+      "interlock_bench",
+      "--samples",
+      "5",
+      "--target-ms",
+      "40"
+    ],
+    "driver_sha256": "ecaa25704a9cb26910bd6283a80a19e5ebccf0a8b317c7202f0cfbf2c061f742",
+    "git_head": "7365bebc249917946812fff176eedea2435c04dc",
+    "source_sha256": {
+      "CMakeLists.txt": "6d638ef80b568cbb33dbb554d124d46bf7cb270e4c9edf0b3e3b5ea820625507",
+      "bench/aes_backend.c": "1312713fcbecbf6011f420a441baed6288184ea8ce48f7618e62872dc419248e",
+      "bench/backend.h": "d0893975a996bb6a6d9c04b47e0c529e4e7edefd87007603e4238c359ccf1f76",
+      "bench/interlock_backend.c": "0c833bc3c636c92df163d0b06668301c25171aaf969b06388f756d6e39f2fbe9",
+      "bench/native.c": "9d45f3c1e92ccc61442678f9a9970f3ac6504df91c2245809bd3f8e6fe41696c",
+      "bench/run.py": "e915a18d56a38159d341c77c69fb2d2e08dccb15270e3fd0007e8b6dba916cd4",
+      "cmake/Bench.cmake": "638f9369ce0e9da06c4836ff2c6c6873e3ae09e8cb406df7899835da3892f753",
+      "include/interlock.h": "8ecc990655407c33655b89fddac0843a3192f2e92fa2d6ae84c33266fe079da8",
+      "src/interlock.c": "615acf0cb2eae93588f2283d51854ed4e0f71b24f26fb39012cbadb741feaeab",
+      "src/interlock_key.c": "79584dbefe0f76f0a7ee05d8b7ab2881826869f6f1a66d1ea9adc8f9e33c1b93",
+      "src/internal.h": "f464d43317dc4f10e0206ca2f32ebd06e740bff35ce02d32729f08bfdf717ae6",
+      "src/support.c": "1647c853d09cd7ca0211fae4431fa3bef75354afe5c91e4ccc2be857bec88c37"
+    }
+  },
+  "rows": [
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 0,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "ns_per_iteration": {
+        "max": 3595.146728515625,
+        "median": 2839.8497314453125,
+        "min": 2327.8177490234375
+      },
+      "operation": "key_create",
+      "samples": [
+        {
+          "elapsed_seconds": 0.02136516,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.023264049,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.028305742,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.019069483,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.029451442,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 0,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "ns_per_iteration": {
+        "max": 210.3914794921875,
+        "median": 123.5450439453125,
+        "min": 94.41259765625
+      },
+      "operation": "key_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.001012081,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001574595,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001723527,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000779876,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000773428,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 3.396531046759649,
+      "ns_per_iteration": {
+        "max": 4755.554382324219,
+        "median": 4492.462707519531,
+        "min": 4164.333740234375
+      },
+      "operation": "fresh_key_encrypt_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.068228444,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.077915003,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.076339478,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.071451537,
+          "iterations": 16384
+        },
+        {
+          "elapsed_seconds": 0.073604509,
+          "iterations": 16384
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.671950646743996,
+      "ns_per_iteration": {
+        "max": 1673.7185668945312,
+        "median": 1577.633056640625,
+        "min": 1557.9200439453125
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.05169588,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.051049924,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.05484441,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.051157364,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.054582176,
+          "iterations": 32768
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.12422828417701,
+      "ns_per_iteration": {
+        "max": 1744.1821594238281,
+        "median": 1672.3374938964844,
+        "min": 1474.4455871582031
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.054799155,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.04866802,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.055656588,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.048314633,
+          "iterations": 32768
+        },
+        {
+          "elapsed_seconds": 0.057153361,
+          "iterations": 32768
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1024,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.0074181853504,
+      "ns_per_iteration": {
+        "max": 116925.34375,
+        "median": 108417.58203125,
+        "min": 92549.9453125
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.059865776,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.047385572,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.055509802,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.052420976,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.057854673,
+          "iterations": 512
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1024,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.768086672311188,
+      "ns_per_iteration": {
+        "max": 144694.8125,
+        "median": 99974.798828125,
+        "min": 86858.357421875
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.046007877,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.05280667,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.044471479,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.074083744,
+          "iterations": 512
+        },
+        {
+          "elapsed_seconds": 0.051187097,
+          "iterations": 512
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16384,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 7.6021806824879,
+      "ns_per_iteration": {
+        "max": 2585264.375,
+        "median": 2055331.3125,
+        "min": 1858191.65625
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.059462133,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.064986461,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.08272846,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.065770602,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.075911464,
+          "iterations": 32
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 16384,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.01950137057637,
+      "ns_per_iteration": {
+        "max": 2814025.40625,
+        "median": 1732357.40625,
+        "min": 1522892.125
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.051918728,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.090048813,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.048732548,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.065727727,
+          "iterations": 32
+        },
+        {
+          "elapsed_seconds": 0.055435437,
+          "iterations": 32
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1048576,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.416366628268607,
+      "ns_per_iteration": {
+        "max": 113754337.0,
+        "median": 106198074.0,
+        "min": 102745666.0
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.113754337,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.103825765,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.102745666,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.106198074,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.109444882,
+          "iterations": 1
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "Interlock-128",
+      "bytes_per_iteration": 1048576,
+      "calls": "one public API call per 16 bytes; full 28 rounds",
+      "median_mib_per_second": 9.965034090481273,
+      "ns_per_iteration": {
+        "max": 102033049.0,
+        "median": 100350886.0,
+        "min": 98537720.0
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.102033049,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.100350886,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.099088072,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.09853772,
+          "iterations": 1
+        },
+        {
+          "elapsed_seconds": 0.100927723,
+          "iterations": 1
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 0,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "ns_per_iteration": {
+        "max": 515.619140625,
+        "median": 392.4669189453125,
+        "min": 352.2335205078125
+      },
+      "operation": "key_create",
+      "samples": [
+        {
+          "elapsed_seconds": 0.004223952,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.003221097,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.003215089,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.002991258,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.002885497,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 0,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "ns_per_iteration": {
+        "max": 199.57275390625,
+        "median": 132.3323974609375,
+        "min": 126.8790283203125
+      },
+      "operation": "key_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.0016349,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001039393,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001511134,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001084067,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.001041834,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 16,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 22.650429857026523,
+      "ns_per_iteration": {
+        "max": 726.6709213256836,
+        "median": 673.664436340332,
+        "min": 626.1830291748047
+      },
+      "operation": "fresh_key_encrypt_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.088298545,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.082075062,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.088165011,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.091750381,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.095246211,
+          "iterations": 131072
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 16,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 68.92565325795624,
+      "ns_per_iteration": {
+        "max": 264.5500831604004,
+        "median": 221.3804054260254,
+        "min": 201.65728378295898
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.052863247,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.069350217,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.058033545,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.054014408,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.059074434,
+          "iterations": 262144
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 16,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 46.80170706418414,
+      "ns_per_iteration": {
+        "max": 657.6475982666016,
+        "median": 326.0306091308594,
+        "min": 297.557861328125
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.053462821,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.086199186,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.039001504,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.041826747,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.042733484,
+          "iterations": 131072
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 1024,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 68.9776703933405,
+      "ns_per_iteration": {
+        "max": 25544.9375,
+        "median": 14157.661376953125,
+        "min": 12487.924560546875
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.062086885,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.104632064,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.051150539,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.057989781,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.055334572,
+          "iterations": 4096
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 1024,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 44.01074399084453,
+      "ns_per_iteration": {
+        "max": 22741.7900390625,
+        "median": 22189.18408203125,
+        "min": 19518.7080078125
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.042922833,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.045443449,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.039974314,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.046502349,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.046575186,
+          "iterations": 2048
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 16384,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 72.30888562679402,
+      "ns_per_iteration": {
+        "max": 276489.4296875,
+        "median": 216086.859375,
+        "min": 191149.3828125
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.055318236,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.048934242,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.06173694,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.053195809,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.070781294,
+          "iterations": 256
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 16384,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 46.16704673303164,
+      "ns_per_iteration": {
+        "max": 357309.90625,
+        "median": 338444.8671875,
+        "min": 286337.1015625
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.039722615,
+          "iterations": 128
+        },
+        {
+          "elapsed_seconds": 0.045735668,
+          "iterations": 128
+        },
+        {
+          "elapsed_seconds": 0.036651149,
+          "iterations": 128
+        },
+        {
+          "elapsed_seconds": 0.044845613,
+          "iterations": 128
+        },
+        {
+          "elapsed_seconds": 0.043320943,
+          "iterations": 128
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 1048576,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 70.70125124423156,
+      "ns_per_iteration": {
+        "max": 16351756.499999998,
+        "median": 14144021.25,
+        "min": 12604974.0
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.05526397,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.065407026,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.056576085,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.058482605,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.050419896,
+          "iterations": 4
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/16B-updates",
+      "bytes_per_iteration": 1048576,
+      "calls": "EVP_CipherUpdate per 16 bytes; padding off",
+      "median_mib_per_second": 47.87019517875329,
+      "ns_per_iteration": {
+        "max": 23644966.5,
+        "median": 20889825.0,
+        "min": 17325878.0
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.034651756,
+          "iterations": 2
+        },
+        {
+          "elapsed_seconds": 0.04177965,
+          "iterations": 2
+        },
+        {
+          "elapsed_seconds": 0.04201135,
+          "iterations": 2
+        },
+        {
+          "elapsed_seconds": 0.038227758,
+          "iterations": 2
+        },
+        {
+          "elapsed_seconds": 0.047289933,
+          "iterations": 2
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 0,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "ns_per_iteration": {
+        "max": 423.2684326171875,
+        "median": 385.15185546875,
+        "min": 284.5709228515625
+      },
+      "operation": "key_create",
+      "samples": [
+        {
+          "elapsed_seconds": 0.003412764,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.003155164,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.003467415,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.002987099,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.002331205,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 0,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "ns_per_iteration": {
+        "max": 153.46435546875,
+        "median": 120.00378417968751,
+        "min": 103.892578125
+      },
+      "operation": "key_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.001034755,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000851088,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000940467,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.000983071,
+          "iterations": 8192
+        },
+        {
+          "elapsed_seconds": 0.00125718,
+          "iterations": 8192
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 16,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 22.454147115934333,
+      "ns_per_iteration": {
+        "max": 682.4474334716797,
+        "median": 679.5532684326172,
+        "min": 620.1443176269531
+      },
+      "operation": "fresh_key_encrypt_free",
+      "samples": [
+        {
+          "elapsed_seconds": 0.044724875,
+          "iterations": 65536
+        },
+        {
+          "elapsed_seconds": 0.04313406,
+          "iterations": 65536
+        },
+        {
+          "elapsed_seconds": 0.044570903,
+          "iterations": 65536
+        },
+        {
+          "elapsed_seconds": 0.044535203,
+          "iterations": 65536
+        },
+        {
+          "elapsed_seconds": 0.040641778,
+          "iterations": 65536
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 16,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 70.4772791823508,
+      "ns_per_iteration": {
+        "max": 244.71722412109375,
+        "median": 216.50650024414062,
+        "min": 189.91179656982422
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.064151152,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.049784238,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.058286278,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.05367512,
+          "iterations": 262144
+        },
+        {
+          "elapsed_seconds": 0.05675588,
+          "iterations": 262144
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 16,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 47.011897912159306,
+      "ns_per_iteration": {
+        "max": 350.40257263183594,
+        "median": 324.5729217529297,
+        "min": 287.66800689697266
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.038619256,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.045458375,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.037705221,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.042542422,
+          "iterations": 131072
+        },
+        {
+          "elapsed_seconds": 0.045927966,
+          "iterations": 131072
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 1024,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 72.49389904938207,
+      "ns_per_iteration": {
+        "max": 15465.639404296875,
+        "median": 13470.961181640625,
+        "min": 11375.30615234375
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.046593254,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.063347259,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.055177057,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.053960739,
+          "iterations": 4096
+        },
+        {
+          "elapsed_seconds": 0.061155775,
+          "iterations": 4096
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 1024,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 50.934321364090394,
+      "ns_per_iteration": {
+        "max": 20636.22119140625,
+        "median": 19172.9755859375,
+        "min": 16539.560546875
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.040806451,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.03387302,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.039266254,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.042262981,
+          "iterations": 2048
+        },
+        {
+          "elapsed_seconds": 0.036094366,
+          "iterations": 2048
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 16384,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 71.82139727846102,
+      "ns_per_iteration": {
+        "max": 305119.75390625,
+        "median": 217553.55078125,
+        "min": 201700.62109375
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.067845066,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.078110657,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.051635359,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.055693709,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.052785867,
+          "iterations": 256
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 16384,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 49.99510610405124,
+      "ns_per_iteration": {
+        "max": 366984.87890625,
+        "median": 312530.58984375,
+        "min": 300786.953125
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.078044837,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.080007831,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.093948129,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.07700146,
+          "iterations": 256
+        },
+        {
+          "elapsed_seconds": 0.087719246,
+          "iterations": 256
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 1048576,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 75.49114206755404,
+      "ns_per_iteration": {
+        "max": 15577222.0,
+        "median": 13246587.25,
+        "min": 12518644.75
+      },
+      "operation": "encrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.062308888,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.058364929,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.052430806,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.052986349,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.050074579,
+          "iterations": 4
+        }
+      ],
+      "warmup_iterations": 3
+    },
+    {
+      "backend": "AES-256-ECB/batch-update",
+      "bytes_per_iteration": 1048576,
+      "calls": "one EVP_CipherUpdate per buffer; padding off",
+      "median_mib_per_second": 46.338973203422945,
+      "ns_per_iteration": {
+        "max": 23940678.5,
+        "median": 21580107.0,
+        "min": 18904435.5
+      },
+      "operation": "decrypt_ready",
+      "samples": [
+        {
+          "elapsed_seconds": 0.086320428,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.088938436,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.082601638,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.075617742,
+          "iterations": 4
+        },
+        {
+          "elapsed_seconds": 0.095762714,
+          "iterations": 4
+        }
+      ],
+      "warmup_iterations": 3
+    }
+  ],
+  "schema_version": 1,
+  "status": "complete",
+  "target_seconds": 0.04,
+  "timer": "clock_gettime(CLOCK_MONOTONIC)"
+}
