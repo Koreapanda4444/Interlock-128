@@ -42,3 +42,5 @@ from constraints import constraints
 STAGES["constraints"] = constraints
 from components import components
 STAGES["components"] = components
+from screening import discovery
+STAGES["discovery"] = discovery

@@ -14,4 +14,6 @@ if(BUILD_TESTING)
       --output ${CMAKE_CURRENT_BINARY_DIR}/research/ctest-smoke.json)
   set_tests_properties(research_harness PROPERTIES TIMEOUT 30)
   set_tests_properties(research_smoke PROPERTIES TIMEOUT 120)
+  add_test(NAME research_screening COMMAND ${Python3_EXECUTABLE}
+      ${CMAKE_CURRENT_SOURCE_DIR}/research/test_screening.py)
 endif()

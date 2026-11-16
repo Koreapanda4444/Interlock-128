@@ -30,8 +30,8 @@
 | 20 | `feat: add reproducible research harness` | 완료 | `b718dcbea78a567e65fc2219e7de80c087f5dc4d` / 연구/제품 target 분리·정확 seed 프레이밍·코드/실행파일 해시·완료/실패/timeout JSON; 기존18검사+연구2검사 통과, smoke/full 및 BUILD_TESTING=OFF 연구 빌드 검증
 | 21 | `test: reproduce outer subkey recovery` | 완료 | `4b21e8b93adde16732ca60fce536569f392d55af` / GF(2) L32 역행렬·32기저 양방향 항등·역 S 검증; 1R k0/k3 64비트 복구 full1024키×2쌍·다른 평문 FS 관계 모두 일치, smoke/연구검사 통과
 | 22 | `test: reproduce reduced-round differential constraints` | 완료 | `2511749fb0ccf1d9a2e09e9d477519623b3f9385` / 2R 네값·3R 지원상계/10개 강제0비트 정확계산; full128키×128쌍 각16384쌍 C 검증 반례0·smoke/연구검사 통과
-| 23 | `feat: calculate exact component properties` | 완료 | DDT/LAT/ANF 전수·행합/Parseval/진리표 재구성; 4/16·Walsh8/16·차수2,3,3,3·L32 rank32 및 기존 역행렬 항등 확인, smoke/연구검사 통과
-| 24 | `feat: screen registered differential masks` | 대기 | — |
+| 23 | `feat: calculate exact component properties` | 완료 | `baa538a5df6ae6f4edfb092ea8eb18c1b1025e5f` / DDT/LAT/ANF 전수·행합/Parseval/진리표 재구성; 4/16·Walsh8/16·차수2,3,3,3·L32 rank32 및 기존 역행렬 항등 확인, smoke/연구검사 통과
+| 24 | `feat: screen registered differential masks` | 완료 | 사전등록 4/8/16/28R×입력128×1024쌍=524288쌍, 출력128계수·65536비교; 라운드별후보와동률규칙을 원시행렬로 재검산·반복결과일치, smoke/연구검사 통과
 | 25 | `test: validate findings on independent holdouts` | 대기 | — |
 | 26 | `docs: record attack scope and unresolved questions` | 대기 | — |
 | 27 | `feat: measure setup and block processing costs` | 대기 | — |
