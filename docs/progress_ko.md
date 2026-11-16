@@ -35,8 +35,8 @@
 | 25 | `test: validate findings on independent holdouts` | 완료 | `340d3bbbb4eb347dc0897844bc1ab10c7f3e2861` / 고정후보4개×다른키4개×32768쌍=524288쌍 full 완료·16개 Wilson95 구간/합산비율 분리; 캐시/재선택 방지·구간경계/NIST검사 및 연구 smoke 통과
 | 26 | `docs: record attack scope and unresolved questions` | 완료 | `e7a8659f856524d36a7a23f8394777429bf73ebb` / 성공한1R/2R/3R 공격·부품 exact·전체 discovery/holdout·한계/미탐색 문서화; full6단계 complete41.06초/1200초·Release/로컬 ASanUBSan22/22·제품소비자 통과, 코어/KAT 불변
 | 27 | `feat: measure setup and block processing costs` | 완료 | `7365bebc249917946812fff176eedea2435c04dc` / native C 공개API11항목·최소5표본·KAT/전체길이왕복·checksum/환경/원시시간; Release23/23·샘플수 오류거부; 실제 비용경계 분리
-| 28 | `feat: add aes reference measurements` | 완료 | AES33항목×5표본·FIPS197 정역KAT·기본/CPUcap0:0 실측; Release23/23; 추가 타이머수정/오류진단·100µs clock 회귀 통과
-| 29 | `test: evaluate bit-compatible scalar optimizations` | 대기 | — |
+| 28 | `feat: add aes reference measurements` | 완료 | `8119660bcd633e4f92a8a78e5bfd04f04facd85e` / AES33항목×5표본·FIPS197 정역KAT·기본/CPUcap0:0 실측; Release23/23; 추가 타이머수정/오류진단·100µs clock 회귀 통과
+| 29 | `test: evaluate bit-compatible scalar optimizations` | 완료 | 실제 ANF 공통항 변형 생성·원본/후보 Release23/23 및 full6단계 동일; 순서교대3쌍×5표본·기계어차이 확인; 개선 불일관으로 제품코어 유지
 | 30 | `docs: report reproducible performance results` | 대기 | — |
 | 31 | `docs: finalize implementation and research handoff` | 대기 | — |
 | 32 | `test: verify clean-checkout acceptance` | 대기 | — |

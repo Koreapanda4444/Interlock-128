@@ -34,3 +34,23 @@ OPENSSL_ia32cap=0:0 python3 bench/run.py --source . --driver build/interlock_ben
 ```
 
 위 환경변수는 x86 OpenSSL 전용 참고 조건입니다. Windows에서는 PowerShell 환경변수를 설정하고 실행파일 경로에 Release 구성을 반영하며 실제 compiler 정보를 전달합니다. AES와 동일 보안 강도가 입증됐다는 비교가 아닙니다.
+
+## 실제 스칼라 호환 최적화 실험
+
+[29번 평가 결과](../bench/results/scalar-evaluation.json)는 PRESENT ANF의 반복 AND 항을 `t01,t12,t03,t13,t23,t012,t013,t023`으로 공유한 실제 C 변형을 생성해 평가했습니다. 제품의 수식·키 확장·라운드 수는 고정했습니다. 후보 전체 코어는 ignored build 디렉터리에만 생성하며 완성 소스 트리에 병렬 구현을 남기지 않습니다. [실험 생성기](../bench/evaluate_scalar.py)가 변형과 실행 절차를 재현합니다. Linux의 `objcopy`로 두 cipher object의 `.text`도 비교했으며 기계어는 달랐습니다.
+
+원본/후보 각각 Release23/23(고정 KAT·1,024개 모든 prefix 포함)와 여섯 단계 연구 full이 통과했습니다. full의 정확 계산·복구·구별자·discovery 계수·holdout cohort 결과가 동일했습니다. 연구는 각각 약30.61초/30.50초에 완료됐으며 이 시간은 처리량 비교가 아닙니다.
+
+| 쌍 | 순서 | 1MiB 암호화 원본시간/후보시간 | 1MiB 복호화 원본시간/후보시간 |
+| ---: | --- | ---: | ---: |
+| 1 | 원본→후보 | 1.073 | 1.029 |
+| 2 | 후보→원본 | 1.039 | 0.659 |
+| 3 | 원본→후보 | 1.141 | 1.222 |
+
+비율1보다 크면 후보가 빨랐습니다. 매 실행은 최소5표본이고 세 쌍의 순서를 바꿨습니다. 암·복호화의 모든 쌍에서 최소5% 감소해야 고려한다는 기준을 충족하지 않아 **제품 코어를 유지**합니다. 특히 두 번째 복호화는 오히려 느렸습니다. 이 공유 호스트 실험 하나로 다른 CPU·compiler에서의 개선 가능성을 부정하지 않습니다. 평가 수치는 타이머 진단 수정 전28번 소스를 기준으로 했고 그 수정은 단일 untimed warmup의0시간 허용·오류 표시를 다루며 암호 연산을 바꾸지 않았습니다.
+
+```sh
+python3 bench/evaluate_scalar.py --source . --work build/scalar-rerun --cmake /actual/path/to/cmake --output build/scalar-rerun.json
+```
+
+평가기는 새 경로만 사용하고 로그·원시 표본을 남깁니다. Linux GNU 도구로 구현한 이 실험 생성기를 Windows/macOS에서 검증했다고 표시하지 않습니다. 자동으로 제품 소스를 교체하지 않습니다.
