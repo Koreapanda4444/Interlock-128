@@ -74,7 +74,7 @@ def write_json(path, value):
 def provenance(root, driver):
     root = Path(root)
     paths = list(CORE_PATHS) + ["tests/reference.py", "tests/vectors.json", "tests/vector_runner.c", "CMakeLists.txt", "cmake/Research.cmake"]
-    paths += sorted(str(p.relative_to(root)) for p in (root/"research").glob("*.py"))
+    paths += sorted(p.relative_to(root).as_posix() for p in (root/"research").glob("*.py"))
     files = {name: hashlib.sha256((root/name).read_bytes()).hexdigest() for name in paths}
     return {"source_sha256": files, "source_manifest_sha256": digest_json(files),
             "core_source_sha256": {name: files[name] for name in CORE_PATHS},

@@ -55,6 +55,7 @@ if __name__ == "__main__":
     parser.add_argument("--openssl-version",default="unspecified")
     parser.add_argument("--profile", choices=("smoke","full"), default="smoke")
     parser.add_argument("--stages", default="")
+    parser.add_argument("--discovery-json",type=Path,help="complete discovery report with its raw count file")
     parser.add_argument("--budget-seconds", type=float)
     parser.add_argument("--compiler-id", default="unspecified")
     parser.add_argument("--compiler-version", default="unspecified")

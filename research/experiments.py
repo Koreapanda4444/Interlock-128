@@ -44,3 +44,5 @@ from components import components
 STAGES["components"] = components
 from screening import discovery
 STAGES["discovery"] = discovery
+from holdout import holdout
+STAGES["holdout"] = holdout

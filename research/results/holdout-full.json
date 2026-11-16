@@ -1,0 +1,433 @@
+{
+  "algorithm": "Interlock-128",
+  "budget_seconds": 1200,
+  "elapsed_seconds": 9.271598,
+  "environment": {
+    "architecture": "x86_64",
+    "build_flags": {
+      "CMAKE_C_FLAGS": "",
+      "CMAKE_C_FLAGS_DEBUG": "-g",
+      "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_GENERATOR": "Unix Makefiles",
+      "CRYPTO_ENABLE_SANITIZERS": "OFF"
+    },
+    "compiler_id": "GNU",
+    "compiler_version": "14.2.0",
+    "configuration": "Release",
+    "openssl": "3.5.7",
+    "os": "Linux",
+    "python": "3.12.14"
+  },
+  "experiments": {
+    "holdout": {
+      "data": {
+        "aggregate": [
+          {
+            "discovery_count": 451,
+            "discovery_pairs": 1024,
+            "holdout_count": 65299,
+            "holdout_pairs": 131072,
+            "holdout_rate": 0.49819183349609375,
+            "input_bit": 19,
+            "note": "pooled descriptive rate for these keys; intervals are reported separately per key",
+            "output_bit": 47,
+            "rounds": 4
+          },
+          {
+            "discovery_count": 451,
+            "discovery_pairs": 1024,
+            "holdout_count": 65313,
+            "holdout_pairs": 131072,
+            "holdout_rate": 0.49829864501953125,
+            "input_bit": 34,
+            "note": "pooled descriptive rate for these keys; intervals are reported separately per key",
+            "output_bit": 54,
+            "rounds": 8
+          },
+          {
+            "discovery_count": 438,
+            "discovery_pairs": 1024,
+            "holdout_count": 65717,
+            "holdout_pairs": 131072,
+            "holdout_rate": 0.5013809204101562,
+            "input_bit": 120,
+            "note": "pooled descriptive rate for these keys; intervals are reported separately per key",
+            "output_bit": 40,
+            "rounds": 16
+          },
+          {
+            "discovery_count": 576,
+            "discovery_pairs": 1024,
+            "holdout_count": 65453,
+            "holdout_pairs": 131072,
+            "holdout_rate": 0.49936676025390625,
+            "input_bit": 102,
+            "note": "pooled descriptive rate for these keys; intervals are reported separately per key",
+            "output_bit": 31,
+            "rounds": 28
+          }
+        ],
+        "cohorts": [
+          {
+            "completed_pairs": 32768,
+            "count": 16407,
+            "input_bit": 19,
+            "input_sha256": "6b5620098f68dfbdc91ba7416fc32b47e795177d06569166c700384b0047bdd2",
+            "key_index": 1,
+            "output_bit": 47,
+            "planned_pairs": 32768,
+            "rate": 0.500701904296875,
+            "rounds": 4,
+            "status": "complete",
+            "wilson95": [
+              0.49528845784120057,
+              0.5061151862005234
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16454,
+            "input_bit": 19,
+            "input_sha256": "2f40e7205c02ab790b6dbd919e36b8a5b573cb7615cf6ea34c7ce9723d61a49c",
+            "key_index": 2,
+            "output_bit": 47,
+            "planned_pairs": 32768,
+            "rate": 0.50213623046875,
+            "rounds": 4,
+            "status": "complete",
+            "wilson95": [
+              0.49672265995249626,
+              0.50754930017449
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16265,
+            "input_bit": 19,
+            "input_sha256": "9475be24f7a7bf0abcb23cd46e68152bc357c95f2b20eb305c52e6e9670f26a6",
+            "key_index": 3,
+            "output_bit": 47,
+            "planned_pairs": 32768,
+            "rate": 0.496368408203125,
+            "rounds": 4,
+            "status": "complete",
+            "wilson95": [
+              0.490955607152166,
+              0.5017820606319572
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16173,
+            "input_bit": 19,
+            "input_sha256": "f130174cb22f710cb0e4d2a62c30f7daf479e4336ef6aa0d8d680331797ea76f",
+            "key_index": 4,
+            "output_bit": 47,
+            "planned_pairs": 32768,
+            "rate": 0.493560791015625,
+            "rounds": 4,
+            "status": "complete",
+            "wilson95": [
+              0.4881486251751033,
+              0.49897446644212357
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16315,
+            "input_bit": 34,
+            "input_sha256": "e3db20e7a635e285546d3d54dcbb2183dde63c5bf9404138637edda0986f82da",
+            "key_index": 1,
+            "output_bit": 54,
+            "planned_pairs": 32768,
+            "rate": 0.497894287109375,
+            "rounds": 8,
+            "status": "complete",
+            "wilson95": [
+              0.4924812124250058,
+              0.503307855449822
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16466,
+            "input_bit": 34,
+            "input_sha256": "be1e979a035ba193eb17164faa3be61476f70691a167c7c73b2f80ef56f6a44e",
+            "key_index": 2,
+            "output_bit": 54,
+            "planned_pairs": 32768,
+            "rate": 0.50250244140625,
+            "rounds": 8,
+            "status": "complete",
+            "wilson95": [
+              0.4970888463531562,
+              0.5079154497955993
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16269,
+            "input_bit": 34,
+            "input_sha256": "022c2011f9751a30077287f8bb45f60f4dea8cebef202b9a39d824ab05c65c08",
+            "key_index": 3,
+            "output_bit": 54,
+            "planned_pairs": 32768,
+            "rate": 0.496490478515625,
+            "rounds": 8,
+            "status": "complete",
+            "wilson95": [
+              0.4910776537187973,
+              0.5019041260725823
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16263,
+            "input_bit": 34,
+            "input_sha256": "bad2523f907a69e7dffffa4d8414d78ccd26bfb1702c4a7017ee44c1cb4b490b",
+            "key_index": 4,
+            "output_bit": 54,
+            "planned_pairs": 32768,
+            "rate": 0.496307373046875,
+            "rounds": 8,
+            "status": "complete",
+            "wilson95": [
+              0.4908945839898439,
+              0.5017210277906511
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16527,
+            "input_bit": 120,
+            "input_sha256": "215d409c62da47e0389e5b2981c6ac26eee37b0c28e647d4b17d7b70af710bd4",
+            "key_index": 1,
+            "output_bit": 40,
+            "planned_pairs": 32768,
+            "rate": 0.504364013671875,
+            "rounds": 16,
+            "status": "complete",
+            "wilson95": [
+              0.4989503387874997,
+              0.5097766654719152
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16399,
+            "input_bit": 120,
+            "input_sha256": "f1f61016e03d447272b18023c2d187656fa184d85f9c4312ceb869433717cec8",
+            "key_index": 2,
+            "output_bit": 40,
+            "planned_pairs": 32768,
+            "rate": 0.500457763671875,
+            "rounds": 16,
+            "status": "complete",
+            "wilson95": [
+              0.49504434276901277,
+              0.5058710772581987
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16237,
+            "input_bit": 120,
+            "input_sha256": "83eecb9f998060457de5f312a78ef1ad77b3f4a8a0df216c9d488cd7755fd3ed",
+            "key_index": 3,
+            "output_bit": 40,
+            "planned_pairs": 32768,
+            "rate": 0.495513916015625,
+            "rounds": 16,
+            "status": "complete",
+            "wilson95": [
+              0.4901012902200399,
+              0.5009275935132887
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16554,
+            "input_bit": 120,
+            "input_sha256": "61fa83337ae8277515c7b3f6bc7f80b24f927b48253147514aa7a20daeb4b553",
+            "key_index": 4,
+            "output_bit": 40,
+            "planned_pairs": 32768,
+            "rate": 0.50518798828125,
+            "rounds": 16,
+            "status": "complete",
+            "wilson95": [
+              0.499774302018926,
+              0.5106004582894694
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16411,
+            "input_bit": 102,
+            "input_sha256": "72a9b7479ebdefb71e286833f428d3c75fef1cd0fb30116cf369c357848654e6",
+            "key_index": 1,
+            "output_bit": 31,
+            "planned_pairs": 32768,
+            "rate": 0.500823974609375,
+            "rounds": 28,
+            "status": "complete",
+            "wilson95": [
+              0.4954105158612321,
+              0.5062372401877484
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16414,
+            "input_bit": 102,
+            "input_sha256": "3d27b9f8f01fc29e9b8d518fb8a6c0076621624738b8e68a0d41aa79f60f6309",
+            "key_index": 2,
+            "output_bit": 31,
+            "planned_pairs": 32768,
+            "rate": 0.50091552734375,
+            "rounds": 28,
+            "status": "complete",
+            "wilson95": [
+              0.49550205958797855,
+              0.5063287804664441
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16421,
+            "input_bit": 102,
+            "input_sha256": "6dcb142236d8c644407999e58befbbfc4d4d790b07e03591a0783132f17be824",
+            "key_index": 3,
+            "output_bit": 31,
+            "planned_pairs": 32768,
+            "rate": 0.501129150390625,
+            "rounds": 28,
+            "status": "complete",
+            "wilson95": [
+              0.495715662322798,
+              0.5065423737443234
+            ]
+          },
+          {
+            "completed_pairs": 32768,
+            "count": 16207,
+            "input_bit": 102,
+            "input_sha256": "1e33338e6f7634ee9d5e7196a7e16e5843b3c5a7960b8da85b4342578a4a04f5",
+            "key_index": 4,
+            "output_bit": 31,
+            "planned_pairs": 32768,
+            "rate": 0.494598388671875,
+            "rounds": 28,
+            "status": "complete",
+            "wilson95": [
+              0.48918596819474386,
+              0.5000120754841622
+            ]
+          }
+        ],
+        "completed_cohorts": 16,
+        "completed_pairs": 524288,
+        "discovery_raw_counts_sha256": "ad03b86cf0a146a97716a1ffa1f72eda8989666bb643fba2c410f2817004b205",
+        "discovery_report": "discovery-for-holdout.json",
+        "family_testing_performed": false,
+        "frozen_candidates": [
+          {
+            "count": 451,
+            "input_bit": 19,
+            "output_bit": 47,
+            "pairs": 1024,
+            "rate": 0.4404296875,
+            "rounds": 4,
+            "score": 122
+          },
+          {
+            "count": 451,
+            "input_bit": 34,
+            "output_bit": 54,
+            "pairs": 1024,
+            "rate": 0.4404296875,
+            "rounds": 8,
+            "score": 122
+          },
+          {
+            "count": 438,
+            "input_bit": 120,
+            "output_bit": 40,
+            "pairs": 1024,
+            "rate": 0.427734375,
+            "rounds": 16,
+            "score": 148
+          },
+          {
+            "count": 576,
+            "input_bit": 102,
+            "output_bit": 31,
+            "pairs": 1024,
+            "rate": 0.5625,
+            "rounds": 28,
+            "score": 128
+          }
+        ],
+        "frozen_candidates_sha256": "2c5ec55b69ff5beed36f6cd24be0b4e10e8ab25fac2a76bbd6cdb0ddb094c24c",
+        "holdout_key_indices": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "holdout_reselection_performed": false,
+        "interval_method": "Wilson score, marginal 95%, descriptive",
+        "pairs_per_candidate_per_key": 32768,
+        "planned_cohorts": 16,
+        "registration_sha256": "70f18aa7c5a6ea1065f61372bed89716de1c9a1b1d021333e5470745934b4ffd",
+        "simultaneous_95_percent_coverage_claim": false
+      },
+      "status": "complete"
+    }
+  },
+  "limits": "finite experiments; not an approval for protecting confidential data",
+  "profile": "full",
+  "provenance": {
+    "core_source_sha256": {
+      "include/interlock.h": "8ecc990655407c33655b89fddac0843a3192f2e92fa2d6ae84c33266fe079da8",
+      "src/interlock.c": "615acf0cb2eae93588f2283d51854ed4e0f71b24f26fb39012cbadb741feaeab",
+      "src/interlock_key.c": "79584dbefe0f76f0a7ee05d8b7ab2881826869f6f1a66d1ea9adc8f9e33c1b93",
+      "src/internal.h": "f464d43317dc4f10e0206ca2f32ebd06e740bff35ce02d32729f08bfdf717ae6",
+      "src/support.c": "1647c853d09cd7ca0211fae4431fa3bef75354afe5c91e4ccc2be857bec88c37"
+    },
+    "driver": "prefix_runner",
+    "driver_sha256": "5d6027874def9e1d60626447af523ccb07cc16d587885fb7ffd86d5d98751209",
+    "source_manifest_sha256": "dd544f6ace80dca356a5fe0be8136ac56d73abd1cf07b0bd0036542a34581117",
+    "source_sha256": {
+      "CMakeLists.txt": "57965225d774537a17a7b1909c7f0acdcf552b2b5bfda0efc102505700f75252",
+      "cmake/Research.cmake": "01cae6efe769997aa3ebe45481787b8776b43167f26e6432a54ec716ecddc73c",
+      "include/interlock.h": "8ecc990655407c33655b89fddac0843a3192f2e92fa2d6ae84c33266fe079da8",
+      "research/algebra.py": "2c9dc688ae99c034021effa7b59e4400787b5546e93c2ef6cf71f90e83a032b7",
+      "research/common.py": "55360812a26c4dcf5bded5db466485bc827333b3d220963dc73a070c12345749",
+      "research/components.py": "0b31ead27111a4e1146aaa6addb17d7d12b8308948af23c9f4f70182080fbf53",
+      "research/constraints.py": "b09bf9fa17874464926563f8b70848dbed0c20472f2fbecfa7ebc55916d50c97",
+      "research/experiments.py": "0d3e17014f31285a3e428612772cc7963d1ccddcf643d70f0807337c9ee92461",
+      "research/holdout.py": "d6eb324b42b35d3c1c1940e666599811def620d0121abdbf10a753d68da220f2",
+      "research/recovery.py": "ce5bf316ba98162df16557a154a802a9a225ca2097cc1201ccb2137943642213",
+      "research/run.py": "5fad082107e614fc76cfb5c1456366c3c54016435eae1e5683b54bd6a671fa0a",
+      "research/screening.py": "39dd648721cddfe4e3df53a49a8ed365856e0e2addc468faa67fd1f326e38c55",
+      "research/statistics_ci.py": "a4725ff3d01b75161f75305b37edd504c252e5c927530dad81fdd24d0b74991f",
+      "research/test_harness.py": "0a6d4cea8536eae2bfff90fe8735e59c1bc9bf9f53ef961005ef948822064a91",
+      "research/test_screening.py": "eb2ad114bfa5ab66c1741a69df1d5d437574411b02e2ac5cee17417c5e7207bf",
+      "research/test_statistics.py": "cd46e284ea4508d3ecc7f4ba7688779bbc38f16040bf1d78e84f453296737ff6",
+      "src/interlock.c": "615acf0cb2eae93588f2283d51854ed4e0f71b24f26fb39012cbadb741feaeab",
+      "src/interlock_key.c": "79584dbefe0f76f0a7ee05d8b7ab2881826869f6f1a66d1ea9adc8f9e33c1b93",
+      "src/internal.h": "f464d43317dc4f10e0206ca2f32ebd06e740bff35ce02d32729f08bfdf717ae6",
+      "src/support.c": "1647c853d09cd7ca0211fae4431fa3bef75354afe5c91e4ccc2be857bec88c37",
+      "tests/reference.py": "ac103223b11682a5b9be0c5b5063dfdcbcb06ecfa6cdcb331e264c8fc8310a26",
+      "tests/vector_runner.c": "8c885233f952f12fc279f8b5d70b0199f2dbc8164028d426cd6dd356cc12831a",
+      "tests/vectors.json": "8fd0502ab7e87d43e24178196a9974cf0e40e2dc181abbcf7acfb834c47bdd6e"
+    }
+  },
+  "registered_stages": [
+    "holdout"
+  ],
+  "schema_version": 1,
+  "seed": 20261109,
+  "status": "complete"
+}
